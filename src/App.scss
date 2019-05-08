@@ -2,23 +2,18 @@
   text-align: center;
   overflow: hidden;
   display: flex;
+  background-color: #282c34;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
   padding-top: 20px;
   font-size: calc(10px + 2vmin);
-  background-color: #282c34;
 
   .app-content {
     display: flex;
+    flex-direction: column;
     max-width: 95%;
   }
-}
-
-.title-box {
-  background: white;
-  padding: 10px 0;
-  width: 100%;
 }
 
 .boxClass {
@@ -31,11 +26,14 @@
   max-width: 500px;
 }
 
+.message {
+  font-size: 0.4em;
+}
+
 .groupClass {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
 }
 
 .resultText {
@@ -60,6 +58,7 @@
   color: rgba(0, 0, 0, 0.5);
   font-weight: bold;
   font-size: 0.5em;
+  margin-bottom: 20px;
 }
 
 .user-info-box {
@@ -70,22 +69,5 @@
     font-size: 1.1em;
     font-weight: bold;
     margin-top: 6px;
-  }
-}
-
-.header-title {
-  font-size: 0.8em;
-  font-weight: bold;
-}
-.header-subtitle {
-  font-size: 0.7em;
-}
-
-.sign-button-group {
-  margin: 8px 0;
-
-  .button-message {
-    margin: 6px 0;
-    font-size: 0.5em;
   }
 }

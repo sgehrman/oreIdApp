@@ -1,0 +1,11 @@
+version: '3'
+services:
+  ore-id-app:
+    build: .
+    container_name: ore-id-app
+    restart: unless-stopped
+    ports:
+      - '8080:80'
+      - '8043:443'
+    networks:
+      - default

@@ -1,0 +1,23 @@
+version:           "3"
+services:
+  nginx-ssl-proxy:
+    image:         danieldent/nginx-ssl-proxy
+    restart:       unless-stopped
+    environment:
+#     couldn't get docker netorking to connect, using ip below
+#     UPSTREAM:    token-toolbox-example:8080
+      UPSTREAM:    159.65.24.195:8080
+
+      SERVERNAME:  freshcocoa.com
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/etc/letsencrypt"
+    networks:
+      - example_default
+      - default
+
+networks:
+  example_default:
+    external:      true

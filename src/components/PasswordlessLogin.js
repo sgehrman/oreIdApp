@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import $ from 'jquery';
-import './PasswordlessLoginStyles.scss';
 import { observer } from 'mobx-react-lite';
-import { intercept } from 'mobx';
 import ENV from '../js/env';
+import ReactPhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/dist/style.css';
+import PhoneNumber from 'awesome-phonenumber';
 
 const modeEnum = {
   START: 'start',
@@ -28,20 +28,6 @@ function PasswordlessLogin(props) {
 
   const { ore, model } = props;
 
-  // auto resize the textarea
-  intercept(model, 'results', (change) => {
-    // must delay it since this is before value is set
-    setTimeout(() => {
-      const textArea = $('.resultText');
-      if (textArea.length > 0) {
-        const height = Math.min(800, textArea[0].scrollHeight);
-        textArea.css('height', `${height}px`);
-      }
-    }, 10);
-
-    return change;
-  });
-
   // Similar to componentDidMount
   useEffect(() => {
     ore.loadUserFromLocalState();
@@ -62,7 +48,7 @@ function PasswordlessLogin(props) {
     const args = { provider, code, chainNetwork: ENV.chainNetwork };
     switch (provider) {
       case 'phone':
-        args.phone = emailOrPhone;
+        args.phone = encodeURIComponent(emailOrPhone); // incase of + sign
         break;
       case 'email':
         args.email = emailOrPhone;
@@ -97,11 +83,6 @@ function PasswordlessLogin(props) {
     }
   }
 
-  function clickedLogout() {
-    ore.logout();
-    setMode(modeEnum.START);
-  }
-
   async function clickedRequestCode(provider) {
     const args = {
       provider,
@@ -109,7 +90,7 @@ function PasswordlessLogin(props) {
 
     switch (provider) {
       case 'phone':
-        args.phone = emailOrPhone;
+        args.phone = encodeURIComponent(emailOrPhone); // incase of + sign
         break;
       case 'email':
         args.email = emailOrPhone;
@@ -188,6 +169,56 @@ function PasswordlessLogin(props) {
     );
   }
 
+  function normalizePhoneToInternational(phone) {
+    let result = phone;
+
+    // PhoneNumber crashes if you send it undefined/null
+    if (phone) {
+      const phoneValidator = PhoneNumber(phone);
+      if (phoneValidator.isValid()) {
+        result = phoneValidator.getNumber();
+      } else {
+        console.log('phone number is invalid');
+      }
+    }
+
+    return result;
+  }
+
+  function handlePhoneChange(phone) {
+    setEmailOrPhone(normalizePhoneToInternational(phone));
+  }
+
+  // for enter key on phone field
+  // onKeyUp wasn't supported, using onKeyDown
+  function handlePhoneKeyDown(e) {
+    if (e.keyCode === 13) {
+      clickedRequestCode('phone');
+    }
+  }
+
+  function doAskRenderPhone() {
+    const phoneProps = {
+      required: true,
+      autoFocus: true,
+    };
+
+    return (
+      <ReactPhoneInput
+        defaultCountry={'us'}
+        inputExtraProps={phoneProps}
+        countryCodeEditable={false}
+        disableSearchIcon={true}
+        enableSearchField={true}
+        disableAreaCodes={true}
+        value={emailOrPhone}
+        placeholder="Your phone number"
+        onChange={handlePhoneChange}
+        onKeyDown={handlePhoneKeyDown}
+      />
+    );
+  }
+
   function doRenderVerify(provider) {
     return (
       <div className="groupClass">
@@ -217,34 +248,6 @@ function PasswordlessLogin(props) {
     );
   }
 
-  function doRenderLoggedIn() {
-    const { accountName, email, name, picture, username } = model.userInfo;
-
-    return (
-      <div className="groupClass">
-        <div>Logged in:</div>
-        <div className="user-info-box">
-          <img src={picture} style={{ width: 50, height: 50 }} alt="user" />
-          <div className="info-title"> accountName</div>
-          <div>{accountName}</div>
-
-          <div className="info-title"> name</div>
-          <div>{name}</div>
-
-          <div className="info-title"> username</div>
-          <div>{username}</div>
-
-          <div className="info-title"> email</div>
-          <div>{email}</div>
-        </div>
-
-        <Button style={buttonMargin} variant="outlined" size="small" onClick={clickedLogout} color="primary">
-          Logout
-        </Button>
-      </div>
-    );
-  }
-
   // render busy if anything is busy
   // if (ore.isBusy()) {
   //   return doRenderBusy();
@@ -253,9 +256,7 @@ function PasswordlessLogin(props) {
   function doRenderPage() {
     let contents = null;
 
-    if (model.isLoggedIn) {
-      contents = doRenderLoggedIn();
-    } else if (ore.waitingForLogin()) {
+    if (ore.waitingForLogin()) {
       contents = null;
     } else {
       // render by mode
@@ -268,7 +269,7 @@ function PasswordlessLogin(props) {
           break;
 
         case modeEnum.ASK_PHONE:
-          contents = doRenderAsk('phone');
+          contents = doAskRenderPhone('phone');
           break;
 
         case modeEnum.VERIFY_EMAIL:
@@ -288,14 +289,8 @@ function PasswordlessLogin(props) {
     return (
       <div>
         <div className="boxClass">
-          <div className="titleClass">ORE ID</div>
           <div className="subtitleClass">Passwordless Login</div>
           {contents}
-        </div>
-
-        <div className="boxClass">
-          <div>Results</div>
-          <textarea readOnly wrap="off" className="resultText" value={model.results} />
         </div>
       </div>
     );
