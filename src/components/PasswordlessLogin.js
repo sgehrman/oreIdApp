@@ -218,13 +218,11 @@ function PasswordlessLogin(props) {
   }
 
   function doRenderVerify(provider) {
+    const message = `Check your ${provider} for the verification code and enter it below.`;
+
     return (
       <div className="groupClass">
-        <div className="message">
-          Check your
-          {provider}
-          for the verification code and enter it below.
-        </div>
+        <div className="message">{message}</div>
 
         <TextField
           id="outlined-number"
