@@ -1,9 +1,4 @@
-This project demonstrates calling the 'eos-auth' api to verify a users email or phone number using oreid's server.
-This is useful if you would like to provide your own UI for authorizing users without using oreid's user interface.
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
+This project demonstrates using ORE ID.
 
 In the project directory, you can run:
 
@@ -29,3 +24,11 @@ The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `docker-compose build`
+
+Builds the docker image on your server with nginx
+
+### `docker-compose up -d`
+
+Runs the docker image with it's own https proxy web server and Let's Encrypt Certificate.
