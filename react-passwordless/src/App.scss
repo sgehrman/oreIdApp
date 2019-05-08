@@ -1,0 +1,16 @@
+.app {
+  text-align: center;
+  overflow: hidden;
+  display: flex;
+  background-color: #282c34;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding-top: 20px;
+  font-size: calc(10px + 2vmin);
+
+  .app-content {
+    display: flex;
+    max-width: 95%;
+  }
+}

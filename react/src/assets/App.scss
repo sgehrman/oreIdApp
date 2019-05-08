@@ -1,0 +1,91 @@
+.app {
+  text-align: center;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding-top: 20px;
+  font-size: calc(10px + 2vmin);
+  background-color: #282c34;
+
+  .app-content {
+    display: flex;
+    max-width: 95%;
+  }
+}
+
+.title-box {
+  background: white;
+  padding: 10px 0;
+  width: 100%;
+}
+
+.boxClass {
+  padding: 20px;
+  background: white;
+  margin-bottom: 8px;
+
+  // so result textarea is reasonably wide
+  min-width: 400px;
+  max-width: 500px;
+}
+
+.groupClass {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.resultText {
+  font-size: 0.4em;
+  text-align: left;
+  width: 100%;
+  overflow: auto;
+  border: solid 1px rgba(0, 0, 0, 0.1);
+  padding: 12px;
+  margin: 8px 0;
+  resize: none;
+  font-family: monospace;
+  box-sizing: border-box;
+}
+
+.titleClass {
+  color: rgba(0, 80, 150, 0.7);
+  font-weight: bold;
+}
+
+.subtitleClass {
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: bold;
+  font-size: 0.5em;
+}
+
+.user-info-box {
+  font-size: 0.6em;
+  margin: 10px 0;
+
+  .info-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-top: 6px;
+  }
+}
+
+.header-title {
+  font-size: 0.8em;
+  font-weight: bold;
+}
+.header-subtitle {
+  font-size: 0.7em;
+}
+
+.sign-button-group {
+  margin: 8px 0;
+
+  .button-message {
+    margin: 6px 0;
+    font-size: 0.5em;
+  }
+}
