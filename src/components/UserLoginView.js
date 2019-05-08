@@ -61,12 +61,7 @@ function UserLoginView(props) {
     );
   }
 
-  return (
-    <div className="boxClass">
-      <div className="header-title">Login to ORE ID</div>
-      {renderLoginButtons()}
-    </div>
-  );
+  return <div>{renderLoginButtons()}</div>;
 }
 
 export default UserLoginView;

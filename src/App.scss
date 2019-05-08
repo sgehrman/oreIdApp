@@ -1,9 +1,10 @@
 .app {
-  text-align: center;
   overflow: hidden;
   display: flex;
   background-color: #282c34;
   flex-direction: column;
+  justify-content: center;
+
   align-items: center;
   min-height: 100vh;
   padding-top: 20px;
@@ -20,6 +21,10 @@
   padding: 20px;
   background: white;
   margin-bottom: 8px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   // so result textarea is reasonably wide
   min-width: 400px;
@@ -62,12 +67,25 @@
 }
 
 .user-info-box {
-  font-size: 0.6em;
+  font-size: 0.5em;
   margin: 10px 0;
+  text-align: center;
 
   .info-title {
     font-size: 1.1em;
     font-weight: bold;
     margin-top: 6px;
   }
+}
+
+.header-title {
+  font-size: 0.7em;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.small-header-title {
+  font-size: 0.4em;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.5);
 }

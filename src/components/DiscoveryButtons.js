@@ -10,6 +10,7 @@ function DiscoveryButtons(props) {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    textAlign: 'center',
     marginTop: '20px',
     flexDirection: 'column',
   };
@@ -20,6 +21,7 @@ function DiscoveryButtons(props) {
   const buttonGroupStyle = {
     display: 'flex',
     flexWrap: 'wrap',
+    justifyContent: 'center',
   };
 
   const chainNetwork = ENV.chainNetwork;
@@ -60,7 +62,7 @@ function DiscoveryButtons(props) {
                 {walletButtons.map((wallet, index) => {
                   const provider = wallet.provider;
                   return (
-                    <div key={index}>
+                    <div key={provider}>
                       <WalletButton
                         provider={provider}
                         data-tag={index}

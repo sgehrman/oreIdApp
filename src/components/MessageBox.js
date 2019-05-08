@@ -25,7 +25,7 @@ function MessageBox(props) {
   let contents = null;
   if (results && results.length > 0) {
     contents = (
-      <div>
+      <div className="boxClass">
         <div className="header-title">Results</div>
         <div className="header-subtitle">{resultsTitle}</div>
         <textarea readOnly wrap="off" className="resultText" value={results} />
@@ -33,7 +33,7 @@ function MessageBox(props) {
     );
   }
 
-  return <div className="boxClass">{contents}</div>;
+  return contents;
 }
 
 export default observer(MessageBox);

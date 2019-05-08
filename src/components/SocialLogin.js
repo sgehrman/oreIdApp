@@ -1,9 +1,9 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
 import { observer } from 'mobx-react-lite';
 import ENV from '../js/env';
 import UserLoginView from './UserLoginView';
-import DiscoveryButtons from './DiscoveryButtons';
-import SigningOptions from './SigningOptions';
+import modeEnum from '../js/enums';
 
 function PasswordlessLogin(props) {
   const { ore, model } = props;
@@ -24,24 +24,18 @@ function PasswordlessLogin(props) {
   }
 
   function doRender() {
-    const { isLoggedIn } = model;
-    let contents = null;
-
-    if (!isLoggedIn) {
-      contents = <UserLoginView clickedLogin={handleLogin} />;
-    } else {
-      contents = (
-        <div>
-          <SigningOptions ore={ore} model={model} />
-          <DiscoveryButtons ore={ore} model={model} />
-        </div>
-      );
-    }
-
     return (
       <div className="groupClass">
-        <div className="subtitleClass">Social Login</div>
-        {contents}
+        <div className="header-title">Social Login</div>
+        <Button
+          onClick={() => {
+            model.mode = modeEnum.START;
+          }}
+        >
+          Back
+        </Button>
+
+        <UserLoginView clickedLogin={handleLogin} />
       </div>
     );
   }

@@ -1,31 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { useLocalStore } from 'mobx-react-lite';
+import { observer, useLocalStore } from 'mobx-react-lite';
+import Button from '@material-ui/core/Button';
 import PasswordlessLogin from './components/PasswordlessLogin';
 import SocialLogin from './components/SocialLogin';
-import Button from '@material-ui/core/Button';
 import './App.scss';
 import ORE from './js/ore';
-import { observer } from 'mobx-react-lite';
 import MessageBox from './components/MessageBox';
 import UserInfo from './components/UserInfo';
-
-const modeEnum = {
-  START: 'start',
-  SHOW_SOCIAL: 'social',
-  SHOW_PASSWORDLESS: 'passwordless',
-};
+import modeEnum from './js/enums';
+import DiscoveryButtons from './components/DiscoveryButtons';
+import SigningOptions from './components/SigningOptions';
 
 const buttonMargin = {
   marginBottom: '6px',
 };
 
 function App() {
-  const [mode, setMode] = useState(modeEnum.START);
-
   const model = useLocalStore(() => ({
     results: '',
     userInfo: {},
     isLoggedIn: false,
+    mode: modeEnum.START,
   }));
 
   const ore = new ORE(model);
@@ -38,7 +33,11 @@ function App() {
   }, []);
 
   function clickedLoginStyle(provider) {
-    setMode(provider);
+    model.mode = provider;
+  }
+
+  function showGitHub() {
+    window.open('https://github.com/sgehrman/oreIdApp', '_blank').focus();
   }
 
   function doRenderStart() {
@@ -51,6 +50,10 @@ function App() {
         <Button style={buttonMargin} variant="outlined" size="small" onClick={() => clickedLoginStyle(modeEnum.SHOW_PASSWORDLESS)} color="primary">
           Passwordless Login
         </Button>
+
+        <Button size="small" onClick={showGitHub}>
+          Code on GitHub
+        </Button>
       </div>
     );
   }
@@ -60,9 +63,15 @@ function App() {
     const isBusy = ore.isBusy();
 
     if (model.isLoggedIn) {
-      contents = <UserInfo ore={ore} model={model} />;
+      contents = (
+        <div>
+          <UserInfo ore={ore} model={model} />
+          <SigningOptions ore={ore} model={model} />
+          <DiscoveryButtons ore={ore} model={model} />
+        </div>
+      );
     } else {
-      switch (mode) {
+      switch (model.mode) {
         case modeEnum.SHOW_PASSWORDLESS:
           contents = <PasswordlessLogin ore={ore} model={model} />;
           break;
@@ -79,14 +88,12 @@ function App() {
       <div className="app">
         <div className="app-content">
           <div className="boxClass">
-            <div className="titleClass">ORE ID</div>
-            <div className="subtitleClass">by AIKON</div>
+            <div className="titleClass">ORE ID TEST</div>
+            <div className="subtitleClass">by Sasquatch</div>
             {contents}
           </div>
 
-          <div className="boxClass">
-            <MessageBox isBusy={isBusy} model={model} />
-          </div>
+          <MessageBox isBusy={isBusy} model={model} />
         </div>
       </div>
     );

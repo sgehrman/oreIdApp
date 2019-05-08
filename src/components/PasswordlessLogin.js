@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { observer } from 'mobx-react-lite';
-import ENV from '../js/env';
 import ReactPhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/dist/style.css';
 import PhoneNumber from 'awesome-phonenumber';
+import modeEnum from '../js/enums';
+import ENV from '../js/env';
 
-const modeEnum = {
+const localModeEnum = {
   START: 'start',
   ASK_EMAIL: 'askEmail',
   ASK_PHONE: 'askPhone',
@@ -18,13 +19,16 @@ const modeEnum = {
 const buttonMargin = {
   marginBottom: '6px',
 };
+const buttonMarginTop = {
+  marginTop: '6px',
+};
 
 function PasswordlessLogin(props) {
   // NOTE: we are using React hooks 'useState'. This is just like React's this.state in React component classes
   // See this link for more information: https://reactjs.org/docs/hooks-overview.html
   const [emailOrPhone, setEmailOrPhone] = useState('');
   const [code, setCode] = useState('');
-  const [mode, setMode] = useState(modeEnum.START);
+  const [mode, setMode] = useState(localModeEnum.START);
 
   const { ore, model } = props;
 
@@ -72,10 +76,10 @@ function PasswordlessLogin(props) {
   function clickedLoginStyle(provider) {
     switch (provider) {
       case 'email':
-        setMode(modeEnum.ASK_EMAIL);
+        setMode(localModeEnum.ASK_EMAIL);
         break;
       case 'phone':
-        setMode(modeEnum.ASK_PHONE);
+        setMode(localModeEnum.ASK_PHONE);
         break;
       default:
         console.log('login style switch failed');
@@ -104,10 +108,10 @@ function PasswordlessLogin(props) {
     if (result.success === true) {
       switch (provider) {
         case 'email':
-          setMode(modeEnum.VERIFY_EMAIL);
+          setMode(localModeEnum.VERIFY_EMAIL);
           break;
         case 'phone':
-          setMode(modeEnum.VERIFY_PHONE);
+          setMode(localModeEnum.VERIFY_PHONE);
           break;
         default:
           console.log('login style switch failed');
@@ -134,27 +138,16 @@ function PasswordlessLogin(props) {
     );
   }
 
-  function doRenderAsk(provider) {
-    let label = 'Email Address';
-    let placeholder = 'example@example.com';
-    let type = 'email';
-    const title = 'Request Login Code';
-
-    if (provider === 'phone') {
-      label = 'Phone Number';
-      placeholder = '12223334444';
-      type = 'number';
-    }
-
+  function doRenderAskEmail() {
     return (
       <div className="groupClass">
         <TextField
           id="outlined-text"
-          type={type}
-          label={label}
+          type="email"
+          label="Email Address"
           onChange={handleEmailOrPhoneChange}
           value={emailOrPhone}
-          placeholder={placeholder}
+          placeholder="example@example.com"
           InputLabelProps={{
             shrink: true,
           }}
@@ -162,8 +155,8 @@ function PasswordlessLogin(props) {
           variant="outlined"
         />
 
-        <Button style={buttonMargin} variant="outlined" size="small" onClick={() => clickedRequestCode(provider)} color="primary">
-          {title}
+        <Button style={buttonMargin} variant="outlined" size="small" onClick={() => clickedRequestCode('email')} color="primary">
+          Request Login Code
         </Button>
       </div>
     );
@@ -204,18 +197,23 @@ function PasswordlessLogin(props) {
     };
 
     return (
-      <ReactPhoneInput
-        defaultCountry={'us'}
-        inputExtraProps={phoneProps}
-        countryCodeEditable={false}
-        disableSearchIcon={true}
-        enableSearchField={true}
-        disableAreaCodes={true}
-        value={emailOrPhone}
-        placeholder="Your phone number"
-        onChange={handlePhoneChange}
-        onKeyDown={handlePhoneKeyDown}
-      />
+      <div className="groupClass">
+        <ReactPhoneInput
+          defaultCountry="us"
+          inputExtraProps={phoneProps}
+          countryCodeEditable={false}
+          disableSearchIcon
+          enableSearchField
+          disableAreaCodes
+          value={emailOrPhone}
+          placeholder="Your phone number"
+          onChange={handlePhoneChange}
+          onKeyDown={handlePhoneKeyDown}
+        />
+        <Button style={buttonMarginTop} variant="outlined" size="small" onClick={() => clickedRequestCode('phone')} color="primary">
+          Request Login Code
+        </Button>
+      </div>
     );
   }
 
@@ -261,22 +259,22 @@ function PasswordlessLogin(props) {
     } else {
       // render by mode
       switch (mode) {
-        case modeEnum.START:
+        case localModeEnum.START:
           contents = doRenderStart();
           break;
-        case modeEnum.ASK_EMAIL:
-          contents = doRenderAsk('email');
+        case localModeEnum.ASK_EMAIL:
+          contents = doRenderAskEmail();
           break;
 
-        case modeEnum.ASK_PHONE:
-          contents = doAskRenderPhone('phone');
+        case localModeEnum.ASK_PHONE:
+          contents = doAskRenderPhone();
           break;
 
-        case modeEnum.VERIFY_EMAIL:
+        case localModeEnum.VERIFY_EMAIL:
           contents = doRenderVerify('email');
           break;
 
-        case modeEnum.VERIFY_PHONE:
+        case localModeEnum.VERIFY_PHONE:
           contents = doRenderVerify('phone');
           break;
 
@@ -287,11 +285,17 @@ function PasswordlessLogin(props) {
     }
 
     return (
-      <div>
-        <div className="boxClass">
-          <div className="subtitleClass">Passwordless Login</div>
-          {contents}
-        </div>
+      <div className="groupClass">
+        <div className="header-title">Passwordless Login</div>
+        <Button
+          onClick={() => {
+            model.mode = modeEnum.START;
+          }}
+        >
+          Go Back
+        </Button>
+
+        <div className="boxClass">{contents}</div>
       </div>
     );
   }
