@@ -53,7 +53,7 @@ function PasswordlessLogin(props) {
     const args = { provider, code, chainNetwork: ENV.chainNetwork };
     switch (provider) {
       case 'phone':
-        args.phone = encodeURIComponent(emailOrPhone); // incase of + sign
+        args.phone = emailOrPhone;
         break;
       case 'email':
         args.email = emailOrPhone;
@@ -95,7 +95,7 @@ function PasswordlessLogin(props) {
 
     switch (provider) {
       case 'phone':
-        args.phone = encodeURIComponent(emailOrPhone); // incase of + sign
+        args.phone = emailOrPhone;
         break;
       case 'email':
         args.email = emailOrPhone;
