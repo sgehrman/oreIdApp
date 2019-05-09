@@ -7,6 +7,7 @@ import 'react-phone-input-2/dist/style.css';
 import PhoneNumber from 'awesome-phonenumber';
 import modeEnum from '../js/enums';
 import ENV from '../js/env';
+import CaptchaComponent from './CaptchaComponent';
 
 const localModeEnum = {
   START: 'start',
@@ -284,6 +285,8 @@ function PasswordlessLogin(props) {
 
     return (
       <div className="groupClass">
+        <CaptchaComponent action="passwordless" />
+
         <div className="header-title">Passwordless Login</div>
         <Button
           onClick={() => {

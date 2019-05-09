@@ -4,6 +4,7 @@ import { observer } from 'mobx-react-lite';
 import ENV from '../js/env';
 import UserLoginView from './UserLoginView';
 import modeEnum from '../js/enums';
+import CaptchaComponent from './CaptchaComponent';
 
 function PasswordlessLogin(props) {
   const { ore, model } = props;
@@ -26,6 +27,8 @@ function PasswordlessLogin(props) {
   function doRender() {
     return (
       <div className="groupClass">
+        <CaptchaComponent action="social" />
+
         <div className="header-title">Social Login</div>
         <Button
           onClick={() => {

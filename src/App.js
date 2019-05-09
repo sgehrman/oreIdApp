@@ -10,6 +10,7 @@ import UserInfo from './components/UserInfo';
 import modeEnum from './js/enums';
 import DiscoveryButtons from './components/DiscoveryButtons';
 import SigningOptions from './components/SigningOptions';
+import CaptchaComponent from './components/CaptchaComponent';
 
 const buttonMargin = {
   marginBottom: '6px',
@@ -87,6 +88,7 @@ function App() {
     return (
       <div className="app">
         <div className="app-content">
+          <CaptchaComponent action="homepage" />
           <div className="boxClass">
             <div className="titleClass">ORE ID TEST</div>
             <div className="subtitleClass">by Sasquatch</div>
