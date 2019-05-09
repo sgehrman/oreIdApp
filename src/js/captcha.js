@@ -7,10 +7,6 @@
 class Captcha {
   constructor(reCaptchaKey) {
     this.reCaptchaKey = reCaptchaKey;
-    this.privateCaptcha = null;
-
-    // hide the captcha badge
-    //
   }
 
   hideCaptchaBadge() {
@@ -24,63 +20,60 @@ class Captcha {
   }
 
   async captchaFunction() {
-    if (this.privateCaptcha) {
-      return this.privateCaptcha;
-    }
+    if (!Captcha.privateCaptcha) {
+      this.hideCaptchaBadge();
 
-    this.hideCaptchaBadge();
+      const getCaptchaFunction = new Promise((resolve, reject) => {
+        const scriptId = 'google-recaptcha-v3';
+        const googleRecaptchaSrc = 'https://www.google.com/recaptcha/api.js';
 
-    const getCaptchaFunction = new Promise((resolve, reject) => {
-      const scriptId = 'google-recaptcha-v3';
-      const googleRecaptchaSrc = 'https://www.google.com/recaptcha/api.js';
-
-      // script already installed, just return
-      if (document.getElementById(scriptId)) {
-        return;
-      }
-
-      const head = document.getElementsByTagName('head')[0];
-      const js = document.createElement('script');
-
-      js.id = scriptId;
-      js.src = `${googleRecaptchaSrc}?render=${this.reCaptchaKey}`;
-
-      js.onload = () => {
-        if (!window || !window.grecaptcha) {
-          reject(new Error('Google recaptcha is not available'));
+        // script already installed, just return
+        if (document.getElementById(scriptId)) {
+          return;
         }
 
-        window.grecaptcha.ready(() => {
-          resolve(window.grecaptcha);
-        });
-      };
+        const head = document.getElementsByTagName('head')[0];
+        const js = document.createElement('script');
 
-      head.appendChild(js);
-    });
+        js.id = scriptId;
+        js.src = `${googleRecaptchaSrc}?render=${this.reCaptchaKey}`;
 
-    try {
-      this.privateCaptcha = await getCaptchaFunction;
-    } catch (error) {
-      console.log(error);
+        js.onload = () => {
+          if (!window || !window.grecaptcha) {
+            reject(new Error('Google recaptcha is not available'));
+          }
+
+          window.grecaptcha.ready(() => {
+            resolve(window.grecaptcha);
+          });
+        };
+
+        head.appendChild(js);
+      });
+
+      try {
+        Captcha.privateCaptcha = await getCaptchaFunction;
+      } catch (error) {
+        console.log(error);
+      }
     }
 
-    return this.privateCaptcha;
+    return Captcha.privateCaptcha;
   }
 
   // public function
-  async call(action) {
+  async call(action, callback = null) {
     // get the google captcha function, async since it has to load the first time
     const captcha = await this.captchaFunction();
 
     if (captcha) {
       captcha.execute(this.reCaptchaKey, { action }).then((token) => {
-        console.log(token);
+        if (callback) {
+          callback(token);
+        }
       });
     }
   }
 }
 
-// singleton
-const instance = new Captcha('6LeiiaIUAAAAAJpDi_k8vyd4FTZG6KOcvYoEIERZ');
-
-export default instance;
+export default Captcha;
