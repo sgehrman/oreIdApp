@@ -13,6 +13,8 @@ const {
   REACT_APP_BACKGROUND_COLOR: backgroundColor, // Background color shown during login flow
   REACT_APP_CHAIN_NETWORK: chainNetwork,
 
+  REACT_APP_AUTH_CALLBACK_PROD: prodAuthCallbackUrl, // The url called by the server when login flow is finished - must match one of the callback strings listed in the App Registration
+  REACT_APP_SIGN_CALLBACK_PROD: prodSignCallbackUrl, // The url called by the server when transaction signing flow is finished - must match one of the callback strings listed in the App Registration
   REACT_APP_OREID_APP_ID_PROD: prodAppId, // Provided when you register your app
   REACT_APP_OREID_API_KEY_PROD: prodApiKey, // Provided when you register your app
   REACT_APP_OREID_URL_PROD: prodOreIdUrl, // HTTPS Address of OREID server
@@ -33,8 +35,8 @@ class ENV {
     };
 
     this.modelProd = {
-      authCallbackUrl,
-      signCallbackUrl,
+      authCallbackUrl: prodAuthCallbackUrl,
+      signCallbackUrl: prodSignCallbackUrl,
       appId: prodAppId,
       apiKey: prodApiKey,
       oreIdUrl: prodOreIdUrl,
@@ -82,6 +84,8 @@ class ENV {
         return str && str.length > 0;
       };
 
+      m.authCallbackUrl = valid(obj.authCallbackUrl) ? obj.authCallbackUrl : m.authCallbackUrl;
+      m.signCallbackUrl = valid(obj.signCallbackUrl) ? obj.signCallbackUrl : m.signCallbackUrl;
       m.appId = valid(obj.appId) ? obj.appId : m.appId;
       m.apiKey = valid(obj.apiKey) ? obj.apiKey : m.apiKey;
       m.oreIdUrl = valid(obj.oreIdUrl) ? obj.oreIdUrl : m.oreIdUrl;

@@ -16,6 +16,8 @@ function SettingsDialog(props) {
 
   function currentENV() {
     return {
+      authCallbackUrl: ore.env().authCallbackUrl,
+      signCallbackUrl: ore.env().signCallbackUrl,
       appId: ore.env().appId,
       apiKey: ore.env().apiKey,
       oreIdUrl: ore.env().oreIdUrl,
@@ -60,6 +62,9 @@ function SettingsDialog(props) {
         <DialogTitle id="form-dialog-title">Settings</DialogTitle>
         <DialogContent>
           <FormControlLabel control={<Checkbox checked={model.prod} onChange={handleCheckChange()} />} label="Production" />
+
+          <TextField autoFocus margin="dense" value={values.authCallbackUrl} label="Auth Callback Url" type="text" fullWidth onChange={handleChange('authCallbackUrl')} />
+          <TextField autoFocus margin="dense" value={values.signCallbackUrl} label="Sign Callback Url" type="text" fullWidth onChange={handleChange('signCallbackUrl')} />
 
           <TextField autoFocus margin="dense" value={values.appId} label="App ID" type="text" fullWidth onChange={handleChange('appId')} />
           <TextField margin="dense" value={values.apiKey} label="API Key" type="text" fullWidth onChange={handleChange('apiKey')} />
