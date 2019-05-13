@@ -27,11 +27,12 @@ const buttonMarginTop = {
 function PasswordlessLogin(props) {
   // NOTE: we are using React hooks 'useState'. This is just like React's this.state in React component classes
   // See this link for more information: https://reactjs.org/docs/hooks-overview.html
-  const [emailOrPhone, setEmailOrPhone] = useState('');
+  const { ore, model, email: savedEmail, phone: savedPhone } = props;
+
+  const [email, setEmail] = useState(savedEmail);
+  const [phone, setPhone] = useState(savedPhone);
   const [code, setCode] = useState('');
   const [mode, setMode] = useState(localModeEnum.START);
-
-  const { ore, model } = props;
 
   // Similar to componentDidMount
   useEffect(() => {
@@ -39,9 +40,9 @@ function PasswordlessLogin(props) {
     ore.handleAuthCallback();
   }, []);
 
-  function handleEmailOrPhoneChange(e) {
+  function handleEmailChange(e) {
     const { value } = e.target;
-    setEmailOrPhone(value);
+    setEmail(value);
   }
 
   function handleCodeChange(e) {
@@ -53,10 +54,10 @@ function PasswordlessLogin(props) {
     const args = { provider, code, chainNetwork: ENV.chainNetwork };
     switch (provider) {
       case 'phone':
-        args.phone = emailOrPhone;
+        args.phone = phone;
         break;
       case 'email':
-        args.email = emailOrPhone;
+        args.email = email;
         break;
       default:
         console.log('login switch not handled');
@@ -95,10 +96,14 @@ function PasswordlessLogin(props) {
 
     switch (provider) {
       case 'phone':
-        args.phone = emailOrPhone;
+        args.phone = phone;
+        localStorage.setItem('phone', phone);
+
         break;
       case 'email':
-        args.email = emailOrPhone;
+        args.email = email;
+        localStorage.setItem('email', email);
+
         break;
       default:
         console.log('login switch not handled');
@@ -146,8 +151,8 @@ function PasswordlessLogin(props) {
           id="outlined-text"
           type="email"
           label="Email Address"
-          onChange={handleEmailOrPhoneChange}
-          value={emailOrPhone}
+          onChange={handleEmailChange}
+          value={email}
           placeholder="example@example.com"
           InputLabelProps={{
             shrink: true,
@@ -163,12 +168,12 @@ function PasswordlessLogin(props) {
     );
   }
 
-  function normalizePhoneToInternational(phone) {
-    let result = phone;
+  function normalizePhoneToInternational(inPhone) {
+    let result = inPhone;
 
     // PhoneNumber crashes if you send it undefined/null
-    if (phone) {
-      const phoneValidator = PhoneNumber(phone);
+    if (inPhone) {
+      const phoneValidator = PhoneNumber(inPhone);
       if (phoneValidator.isValid()) {
         result = phoneValidator.getNumber();
       } else {
@@ -179,8 +184,8 @@ function PasswordlessLogin(props) {
     return result;
   }
 
-  function handlePhoneChange(phone) {
-    setEmailOrPhone(normalizePhoneToInternational(phone));
+  function handlePhoneChange(inPhone) {
+    setPhone(normalizePhoneToInternational(inPhone));
   }
 
   // for enter key on phone field
@@ -206,7 +211,7 @@ function PasswordlessLogin(props) {
           disableSearchIcon
           enableSearchField
           disableAreaCodes
-          value={emailOrPhone}
+          value={phone}
           placeholder="Your phone number"
           onChange={handlePhoneChange}
           onKeyDown={handlePhoneKeyDown}

@@ -12,6 +12,15 @@ export default class ORE {
     this.v_waitingForLocalStateLogin = false;
     this.v_model = model;
 
+    this.createOREId();
+  }
+
+  reload() {
+    ENV.loadFromLocalStorage();
+    this.createOREId();
+  }
+
+  createOREId() {
     const eosTransitWalletProviders = [scatterProvider(), ledgerProvider({ pathIndexList: [0, 1, 2, 35] }), lynxProvider(), meetoneProvider(), tokenpocketProvider()];
 
     const setBusyCallback = (isBusy) => {

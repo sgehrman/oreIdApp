@@ -11,6 +11,7 @@ import modeEnum from './js/enums';
 import DiscoveryButtons from './components/DiscoveryButtons';
 import SigningOptions from './components/SigningOptions';
 import CaptchaComponent from './components/CaptchaComponent';
+import SettingsDialog from './components/SettingsDialog';
 
 const buttonMargin = {
   marginBottom: '6px',
@@ -26,11 +27,27 @@ function App() {
 
   const ore = new ORE(model);
 
+  const [phone, setPhone] = React.useState('');
+  const [email, setEmail] = React.useState('');
+
+  function loadFromStorage() {
+    let p = localStorage.getItem('phone');
+    if (p && p.length) {
+      setPhone(p);
+    }
+
+    p = localStorage.getItem('email');
+    if (p && p.length) {
+      setEmail(p);
+    }
+  }
+
   // Similar to componentDidMount
   useEffect(() => {
     ore.loadUserFromLocalState();
     ore.handleAuthCallback();
     ore.handleSignCallback();
+    loadFromStorage();
   }, []);
 
   function clickedLoginStyle(provider) {
@@ -74,7 +91,7 @@ function App() {
     } else {
       switch (model.mode) {
         case modeEnum.SHOW_PASSWORDLESS:
-          contents = <PasswordlessLogin ore={ore} model={model} />;
+          contents = <PasswordlessLogin ore={ore} model={model} phone={phone} email={email} />;
           break;
         case modeEnum.SHOW_SOCIAL:
           contents = <SocialLogin ore={ore} model={model} />;
@@ -88,6 +105,8 @@ function App() {
     return (
       <div className="app">
         <div className="app-content">
+          <SettingsDialog ore={ore} />
+
           <CaptchaComponent action="homepage" />
           <div className="boxClass">
             <div className="titleClass">ORE ID TEST</div>

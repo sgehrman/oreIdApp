@@ -21,6 +21,26 @@ class ENV {
     this.oreIdUrl = oreIdUrl;
     this.backgroundColor = backgroundColor;
     this.chainNetwork = chainNetwork;
+
+    this.loadFromLocalStorage();
+  }
+
+  loadFromLocalStorage() {
+    const settings = localStorage.getItem('settings');
+
+    if (settings && settings.length) {
+      const obj = JSON.parse(settings);
+
+      const valid = (str) => {
+        return str && str.length > 0;
+      };
+
+      this.appId = valid(obj.appId) ? obj.appId : this.appId;
+      this.apiKey = valid(obj.apiKey) ? obj.apiKey : this.apiKey;
+      this.oreIdUrl = valid(obj.oreIdUrl) ? obj.oreIdUrl : this.oreIdUrl;
+      this.backgroundColor = valid(obj.backgroundColor) ? obj.backgroundColor : this.backgroundColor;
+      this.chainNetwork = valid(obj.chainNetwork) ? obj.chainNetwork : this.chainNetwork;
+    }
   }
 }
 
