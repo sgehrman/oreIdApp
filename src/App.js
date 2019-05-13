@@ -18,12 +18,19 @@ const buttonMargin = {
 };
 
 function App() {
+  let p = localStorage.getItem('prod');
+
+  let prod = false;
+  if (p) {
+    prod = true;
+  }
+
   const model = useLocalStore(() => ({
     results: '',
     userInfo: {},
     isLoggedIn: false,
     mode: modeEnum.START,
-    prod: false,
+    prod,
   }));
 
   const ore = new ORE(model);
