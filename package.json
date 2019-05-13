@@ -3,28 +3,30 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "^3.0.0",
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
-    "eos-auth": "2.1.3",
-    "jquery": "^3.4.1",
-    "dotenv": "^8.0.0",
-    "mobx": "^5.9.4",
-    "mobx-react-lite": "^1.3.1",
-    "react-phone-input-2": "^2.9.3",
     "awesome-phonenumber": "^2.10.0",
+    "dotenv": "^8.0.0",
+    "eos-auth": "2.1.5",
     "eos-transit-ledger-provider": "^3.2.0",
     "eos-transit-lynx-provider": "^3.1.0",
     "eos-transit-meetone-provider": "^3.1.0",
     "eos-transit-scatter-provider": "^3.1.0",
-    "eos-transit-tokenpocket-provider": "^3.1.0"
+    "eos-transit-tokenpocket-provider": "^3.1.0",
+    "jquery": "^3.4.1",
+    "mobx": "^5.9.4",
+    "mobx-react-lite": "^1.3.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-phone-input-2": "^2.9.3",
+    "react-scripts": "^3.0.1",
+    "source-map-explorer": "^1.8.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "lint": "eslint --ext .js --ext .jsx ./src --fix"
+    "lint": "eslint --ext .js --ext .jsx ./src --fix",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "browserslist": {
     "production": [

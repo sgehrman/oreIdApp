@@ -1,25 +1,30 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import SettingsButton from './SettingsButton';
-import ENV from '../js/env';
 
-function FormDialog(props) {
+function SettingsDialog(props) {
+  const { ore, model } = props;
+
   const [open, setOpen] = React.useState(false);
-  const [values, setValues] = React.useState({
-    appId: ENV.appId,
-    apiKey: ENV.apiKey,
-    oreIdUrl: ENV.oreIdUrl,
-    backgroundColor: ENV.backgroundColor,
-    chainNetwork: ENV.chainNetwork,
-  });
 
-  const { ore } = props;
+  function currentENV() {
+    return {
+      appId: ore.env().appId,
+      apiKey: ore.env().apiKey,
+      oreIdUrl: ore.env().oreIdUrl,
+      backgroundColor: ore.env().backgroundColor,
+      chainNetwork: ore.env().chainNetwork,
+    };
+  }
+
+  const [values, setValues] = React.useState(currentENV());
 
   function handleClickOpen() {
     setOpen(true);
@@ -30,8 +35,7 @@ function FormDialog(props) {
   }
 
   function handleSave() {
-    localStorage.setItem('settings', JSON.stringify(values));
-
+    ore.saveSettings(JSON.stringify(values));
     ore.reload();
 
     setOpen(false);
@@ -41,13 +45,23 @@ function FormDialog(props) {
     setValues({ ...values, [name]: event.target.value });
   };
 
+  const handleCheckChange = () => (event) => {
+    model.prod = event.target.checked;
+
+    localStorage.setItem('prod', event.target.checked);
+
+    ore.reload();
+    setValues({ ...currentENV() });
+  };
+
   return (
     <div>
       <SettingsButton onClick={handleClickOpen} />
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Settings</DialogTitle>
         <DialogContent>
-          {/* <DialogContentText>To subscribe to this website, please enter your email address here. We will send updates occasionally.</DialogContentText> */}
+          <FormControlLabel control={<Checkbox checked={model.prod} onChange={handleCheckChange()} />} label="Production" />
+
           <TextField autoFocus margin="dense" value={values.appId} label="App ID" type="text" fullWidth onChange={handleChange('appId')} />
           <TextField margin="dense" value={values.apiKey} label="API Key" type="text" fullWidth onChange={handleChange('apiKey')} />
           <TextField margin="dense" value={values.oreIdUrl} label="ORE ID Url" type="text" fullWidth onChange={handleChange('oreIdUrl')} />
@@ -67,4 +81,4 @@ function FormDialog(props) {
   );
 }
 
-export default FormDialog;
+export default SettingsDialog;

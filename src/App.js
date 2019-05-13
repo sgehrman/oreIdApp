@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { observer, useLocalStore } from 'mobx-react-lite';
 import Button from '@material-ui/core/Button';
 import PasswordlessLogin from './components/PasswordlessLogin';
@@ -23,6 +23,7 @@ function App() {
     userInfo: {},
     isLoggedIn: false,
     mode: modeEnum.START,
+    prod: false,
   }));
 
   const ore = new ORE(model);
@@ -105,7 +106,7 @@ function App() {
     return (
       <div className="app">
         <div className="app-content">
-          <SettingsDialog ore={ore} />
+          <SettingsDialog ore={ore} model={model} />
 
           <CaptchaComponent action="homepage" />
           <div className="boxClass">

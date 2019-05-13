@@ -6,7 +6,6 @@ import ReactPhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/dist/style.css';
 import PhoneNumber from 'awesome-phonenumber';
 import modeEnum from '../js/enums';
-import ENV from '../js/env';
 import CaptchaComponent from './CaptchaComponent';
 
 const localModeEnum = {
@@ -51,7 +50,7 @@ function PasswordlessLogin(props) {
   }
 
   async function loginWithCode(provider) {
-    const args = { provider, code, chainNetwork: ENV.chainNetwork };
+    const args = { provider, code, chainNetwork: ore.env().chainNetwork };
     switch (provider) {
       case 'phone':
         args.phone = phone;

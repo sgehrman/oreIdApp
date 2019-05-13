@@ -1,16 +1,15 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { observer } from 'mobx-react-lite';
-import ENV from '../js/env';
 import UserLoginView from './UserLoginView';
 import modeEnum from '../js/enums';
 import CaptchaComponent from './CaptchaComponent';
 
-function PasswordlessLogin(props) {
+function SocialLogin(props) {
   const { ore, model } = props;
 
   async function handleLogin(provider) {
-    const args = { provider, chainNetwork: ENV.chainNetwork };
+    const args = { provider, chainNetwork: ore.env().chainNetwork };
 
     const loginResponse = await ore.login(args);
     if (loginResponse) {
@@ -46,4 +45,4 @@ function PasswordlessLogin(props) {
   return doRender();
 }
 
-export default observer(PasswordlessLogin);
+export default observer(SocialLogin);

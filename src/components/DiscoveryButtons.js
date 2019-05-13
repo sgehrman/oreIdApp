@@ -1,6 +1,5 @@
 import React from 'react';
 import WalletButton from './WalletButton';
-import ENV from '../js/env';
 
 function DiscoveryButtons(props) {
   const { ore, model } = props;
@@ -24,7 +23,7 @@ function DiscoveryButtons(props) {
     justifyContent: 'center',
   };
 
-  const chainNetwork = ENV.chainNetwork;
+  const chainNetwork = ore.env().chainNetwork;
 
   const walletButtons = [
     { provider: 'scatter', chainNetwork },
@@ -40,10 +39,10 @@ function DiscoveryButtons(props) {
 
       const { provider } = walletButtons[permissionIndex] || {};
       if (ore.canDiscover(provider)) {
-        await ore.discover({ provider, chainNetwork: ENV.chainNetwork });
+        await ore.discover({ provider, chainNetwork: ore.env().chainNetwork });
       } else {
         console.log("Provider doesn't support discover, so we'll call login instead");
-        await ore.login({ provider, chainNetwork: ENV.chainNetwork });
+        await ore.login({ provider, chainNetwork: ore.env().chainNetwork });
       }
       ore.loadUserFromApi(model.userInfo.accountName); // reload user from ore id api - to show new keys discovered
     } catch (error) {

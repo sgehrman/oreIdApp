@@ -11,13 +11,22 @@ export default class ORE {
     this.v_busyFlag = false;
     this.v_waitingForLocalStateLogin = false;
     this.v_model = model;
+    this.v_env = new ENV();
 
     this.createOREId();
   }
 
+  env() {
+    return this.v_env.getModel(this.v_model.prod);
+  }
+
   reload() {
-    ENV.loadFromLocalStorage();
+    this.v_env.loadFromLocalStorage(this.v_model.prod);
     this.createOREId();
+  }
+
+  saveSettings(settings) {
+    this.v_env.saveToLocalStorage(settings, this.v_model.prod);
   }
 
   createOREId() {
@@ -30,12 +39,12 @@ export default class ORE {
 
     this.v_oreid = new OreId({
       appName: 'ORE ID Sample App',
-      appId: ENV.appId,
-      apiKey: ENV.apiKey,
-      oreIdUrl: ENV.oreIdUrl,
-      authCallbackUrl: ENV.authCallbackUrl,
-      signCallbackUrl: ENV.signCallbackUrl,
-      backgroundColor: ENV.backgroundColor,
+      appId: this.env().appId,
+      apiKey: this.env().apiKey,
+      oreIdUrl: this.env().oreIdUrl,
+      authCallbackUrl: this.env().authCallbackUrl,
+      signCallbackUrl: this.env().signCallbackUrl,
+      backgroundColor: this.env().backgroundColor,
       setBusyCallback,
       eosTransitWalletProviders,
     });
