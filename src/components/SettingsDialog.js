@@ -51,7 +51,6 @@ function SettingsDialog(props) {
     localStorage.setItem('prod', event.target.checked);
 
     ore.reload();
-    setValues({ ...currentENV() });
   };
 
   return (
