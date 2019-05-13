@@ -1,5 +1,4 @@
 import dotenv from 'dotenv';
-import { useLocalStore } from 'mobx-react-lite';
 
 dotenv.config();
 
