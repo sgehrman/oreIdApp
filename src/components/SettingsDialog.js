@@ -50,6 +50,7 @@ function SettingsDialog(props) {
     model.prod = event.target.checked;
 
     ore.reload();
+    setValues({ ...currentENV() });
   };
 
   return (
