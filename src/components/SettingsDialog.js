@@ -46,9 +46,8 @@ function SettingsDialog(props) {
   };
 
   const handleCheckChange = () => (event) => {
-    model.prod = event.target.checked;
-
     localStorage.setItem('prod', event.target.checked);
+    model.prod = event.target.checked;
 
     ore.reload();
   };
