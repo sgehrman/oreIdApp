@@ -7,26 +7,21 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import SettingsButton from './SettingsButton';
+import ENV from '../js/env';
 
 function FormDialog(props) {
   const [open, setOpen] = React.useState(false);
   const [values, setValues] = React.useState({
-    appId: '',
-    apiKey: '',
-    oreIdUrl: '',
-    backgroundColor: '',
-    chainNetwork: '',
+    appId: ENV.appId,
+    apiKey: ENV.apiKey,
+    oreIdUrl: ENV.oreIdUrl,
+    backgroundColor: ENV.backgroundColor,
+    chainNetwork: ENV.chainNetwork,
   });
 
   const { ore } = props;
 
   function handleClickOpen() {
-    const settings = localStorage.getItem('settings');
-
-    if (settings && settings.length) {
-      setValues(JSON.parse(settings));
-    }
-
     setOpen(true);
   }
 
