@@ -11,7 +11,7 @@ function SigningOptions(props) {
 
   async function handleSignSampleTransaction(provider, account, chainAccount, chainNetwork, permission) {
     try {
-      model.clearErrors();
+      ore.displayResults();
 
       const transaction = Utils.createSampleTransaction(chainAccount, permission);
       const signOptions = {
@@ -40,7 +40,7 @@ function SigningOptions(props) {
   }
 
   async function handleSignButton(permissionIndex) {
-    model.clearErrors();
+    ore.displayResults();
 
     const { chainAccount, chainNetwork, permission, externalWalletType: provider } = permissionsToRender[permissionIndex] || {};
     const { accountName } = model.userInfo;

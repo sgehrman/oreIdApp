@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
+import { autorun } from 'mobx';
 
 const validProviders = ['oreid', 'scatter', 'facebook', 'github', 'google', 'kakao', 'line', 'linkedin', 'twitch', 'twitter', 'wechat', 'ledger', 'lynx', 'meetone', 'tokenpocket'];
 
@@ -14,8 +15,9 @@ class SignButton extends Component {
       onClickCallback: this.props.onClick,
       logoStyle: {
         marginRight: '8px',
+        width: '24px',
+        height: 'auto',
         ...providerStyle.logoStyle,
-        ...this.props.logoStyle,
       },
       text: this.props.text || providerStyle.text,
     };
@@ -36,7 +38,7 @@ class SignButton extends Component {
     return (
       <div>
         <Button
-          style={providerStyle.buttonStyle}
+          variant="outlined"
           onClick={() => {
             onClickCallback(provider);
           }}

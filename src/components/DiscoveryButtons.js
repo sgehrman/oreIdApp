@@ -35,7 +35,7 @@ function DiscoveryButtons(props) {
 
   async function handleWalletDiscoverButton(permissionIndex) {
     try {
-      model.clearErrors();
+      ore.displayResults();
 
       const { provider } = walletButtons[permissionIndex] || {};
       if (ore.canDiscover(provider)) {
