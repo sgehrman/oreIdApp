@@ -1,0 +1,9 @@
+{
+  "javascript.implicitProjectConfig.experimentalDecorators": true,
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#8B3052",
+    "titleBar.inactiveBackground": "#8B3052",
+    "titleBar.activeBackground": "#8B3052"
+  },
+  "eslint.alwaysShowStatus": true
+}
