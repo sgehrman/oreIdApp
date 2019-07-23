@@ -27,9 +27,7 @@ class SignButton extends Component {
 
     const logoStyle = {
       ...buttonOptions.logoStyle,
-      marginRight: '8px',
-      width: '24px',
-      height: 'auto'
+      marginRight: '8px'
     };
 
     return (

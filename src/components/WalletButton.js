@@ -34,22 +34,12 @@ class WalletButton extends Component {
       alignItems: 'center'
     };
 
-    const defaultLogoStyle = {
-      width: '24px',
-      height: 'auto'
-    };
-
     const buttonOptions = ProviderStyles.styleForProvider(provider);
     const logoPath = ProviderStyles.logoForProvider(provider);
 
     const buttonStyle = {
       ...buttonOptions.buttonStyle,
       ...defaultButtonStyle
-    };
-
-    const logoStyle = {
-      ...buttonOptions.logoStyle,
-      ...defaultLogoStyle
     };
 
     return (
@@ -61,7 +51,7 @@ class WalletButton extends Component {
           }}
         >
           <div style={contentStyle}>
-            <img style={logoStyle} src={logoPath} alt={buttonOptions.text} />
+            <img style={buttonOptions.logoStyle} src={logoPath} alt={buttonOptions.text} />
             {buttonOptions.text}
           </div>
         </Button>

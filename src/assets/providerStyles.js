@@ -78,7 +78,6 @@ const buttonStyles = {
       backgroundColor: '#39C5AB'
     },
     logoStyle: {
-      marginLeft: 12
     },
     text: 'Sign with Ledger'
   },
@@ -111,9 +110,6 @@ const buttonStyles = {
       backgroundColor: '#808080'
     },
     logoStyle: {
-      width: 40,
-      height: 40,
-      marginLeft: 5
     },
     text: 'Sign with MeetOne'
   },
@@ -138,8 +134,6 @@ const buttonStyles = {
       backgroundColor: '#7ECEF9'
     },
     logoStyle: {
-      width: 30,
-      height: 30
     },
     text: 'Log in with Scatter'
   },
@@ -148,9 +142,6 @@ const buttonStyles = {
       backgroundColor: '#2C8FF0'
     },
     logoStyle: {
-      width: 40,
-      height: 40,
-      marginLeft: 5
     },
     text: 'Sign with TokenPocket'
   },
@@ -200,10 +191,10 @@ const defaultButtonStyle = {
 };
 
 const defaultLogoStyle = {
-  width: '24px',
+  width: '20px',
+  height: 'auto',
   marginLeft: '10px',
-  marginRight: '10px',
-  verticalAlign: 'bottom'
+  marginRight: '10px'
 };
 
 class ProviderStyles {
