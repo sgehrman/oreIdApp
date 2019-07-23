@@ -11,16 +11,16 @@ function DiscoveryButtons(props) {
     alignItems: 'center',
     textAlign: 'center',
     marginTop: '20px',
-    flexDirection: 'column',
+    flexDirection: 'column'
   };
   const innerButtonBox = {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column'
   };
   const buttonGroupStyle = {
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'center',
+    justifyContent: 'center'
   };
 
   const chainNetwork = ore.env().chainNetwork;
@@ -30,7 +30,7 @@ function DiscoveryButtons(props) {
     { provider: 'ledger', chainNetwork },
     { provider: 'lynx', chainNetwork },
     { provider: 'meetone', chainNetwork },
-    { provider: 'tokenpocket', chainNetwork },
+    { provider: 'tokenpocket', chainNetwork }
   ];
 
   async function handleWalletDiscoverButton(permissionIndex) {
@@ -65,7 +65,6 @@ function DiscoveryButtons(props) {
                       <WalletButton
                         provider={provider}
                         data-tag={index}
-                        text={`${provider}`}
                         onClick={() => {
                           handleWalletDiscoverButton(index);
                         }}

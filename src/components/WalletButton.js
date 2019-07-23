@@ -1,53 +1,57 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
-
-const validProviders = ['oreid', 'scatter', 'facebook', 'github', 'google', 'kakao', 'line', 'linkedin', 'twitch', 'twitter', 'wechat', 'ledger', 'lynx', 'meetone', 'tokenpocket'];
-
-const defaultButtonStyle = {
-  margin: '6px',
-  color: '#ffffff',
-};
-
-const contentStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-};
-
-const defaultLogoStyle = {
-  width: '24px',
-  height: 'auto',
-};
+import ProviderStyles from '../assets/providerStyles';
 
 class WalletButton extends Component {
   constructor(props) {
     super(props);
-    this.checkValidProvider(this.props.provider);
-    const providerStyle = require(`../assets/button-styles/${this.props.provider}-style.json`) || {}; // get the style for this provider
-    this.state = {
-      provider: this.props.provider,
-      onClickCallback: this.props.onClick,
-      buttonStyle: {
-        ...defaultButtonStyle,
-        ...providerStyle.buttonStyle,
-        ...this.props.buttonStyle,
-      },
-      logoStyle: {
-        ...defaultLogoStyle,
-      },
-      text: this.props.text || providerStyle.text,
-    };
-  }
 
-  checkValidProvider(provider) {
-    if (!validProviders.includes(provider)) {
-      throw Error(`${provider} is not one of the supported providers. Use one of the following: ${validProviders.join(', ')}`);
+    const { provider } = props;
+
+    if (!ProviderStyles.isProviderValid(provider)) {
+      throw Error(`${provider} is not one of the supported providers.`);
     }
+
+    this.state = {
+      provider,
+      onClickCallback: this.props.onClick
+    };
   }
 
   render() {
     // TODO: Check that provider is one of the valid types
-    const { provider, onClickCallback, buttonStyle, logoStyle, text } = this.state;
+    const { provider, onClickCallback } = this.state;
+
+    const defaultButtonStyle = {
+      margin: '6px',
+      color: '#ffffff',
+      width: 'auto'
+    };
+
+    const contentStyle = {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center'
+    };
+
+    const defaultLogoStyle = {
+      width: '24px',
+      height: 'auto'
+    };
+
+    const buttonOptions = ProviderStyles.styleForProvider(provider);
+    const logoPath = ProviderStyles.logoForProvider(provider);
+
+    const buttonStyle = {
+      ...buttonOptions.buttonStyle,
+      ...defaultButtonStyle
+    };
+
+    const logoStyle = {
+      ...buttonOptions.logoStyle,
+      ...defaultLogoStyle
+    };
+
     return (
       <div>
         <Button
@@ -57,8 +61,8 @@ class WalletButton extends Component {
           }}
         >
           <div style={contentStyle}>
-            <img style={logoStyle} src={require(`../assets/button-styles/${provider}-logo.png`)} alt={text} />
-            {text}
+            <img style={logoStyle} src={logoPath} alt={buttonOptions.text} />
+            {buttonOptions.text}
           </div>
         </Button>
       </div>

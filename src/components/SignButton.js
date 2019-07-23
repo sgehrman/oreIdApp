@@ -1,50 +1,48 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
-import { autorun } from 'mobx';
-
-const validProviders = ['oreid', 'scatter', 'facebook', 'github', 'google', 'kakao', 'line', 'linkedin', 'twitch', 'twitter', 'wechat', 'ledger', 'lynx', 'meetone', 'tokenpocket'];
+import ProviderStyles from '../assets/providerStyles';
 
 class SignButton extends Component {
   constructor(props) {
     super(props);
-    this.checkValidProvider(this.props.provider);
-    const providerStyle = require(`../assets/button-styles/${this.props.provider}-style.json`) || {}; // get the style for this provider
+
+    const { provider } = this.props;
+
+    if (!ProviderStyles.isProviderValid(provider)) {
+      throw Error(`${provider} is not one of the supported providers.`);
+    }
 
     this.state = {
-      provider: this.props.provider,
-      onClickCallback: this.props.onClick,
-      logoStyle: {
-        marginRight: '8px',
-        width: '24px',
-        height: 'auto',
-        ...providerStyle.logoStyle,
-      },
-      text: this.props.text || providerStyle.text,
+      provider,
+      onClickCallback: this.props.onClick
     };
-  }
-
-  checkValidProvider(provider) {
-    if (!validProviders.includes(provider)) {
-      throw Error(`${provider} is not one of the supported providers. Use one of the following: ${validProviders.join(', ')}`);
-    }
   }
 
   render() {
     // TODO: Check that provider is one of the valid types
-    const { provider, onClickCallback, logoStyle, text } = this.state;
+    const { provider, onClickCallback } = this.state;
 
-    const providerStyle = require(`../assets/button-styles/${provider}-style.json`) || {};
+    const buttonOptions = ProviderStyles.styleForProvider(provider, 'Sign with');
+    const logoPath = ProviderStyles.logoForProvider(provider);
+
+    const logoStyle = {
+      ...buttonOptions.logoStyle,
+      marginRight: '8px',
+      width: '24px',
+      height: 'auto'
+    };
 
     return (
       <div>
         <Button
           variant="outlined"
+          style={buttonOptions.buttonStyle}
           onClick={() => {
             onClickCallback(provider);
           }}
         >
-          <img style={logoStyle} src={require(`../assets/button-styles/${provider}-logo.png`)} alt={text} />
-          {text}
+          <img style={logoStyle} src={logoPath} alt={buttonOptions.text} />
+          {buttonOptions.text}
         </Button>
       </div>
     );
