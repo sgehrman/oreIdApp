@@ -5,58 +5,40 @@ function UserLoginView(props) {
   function renderLoginButtons() {
     const { clickedLogin } = props;
 
+    const providers = [
+      'facebook',
+      'twitter',
+      'github',
+      'twitch',
+      'line',
+      'kakao',
+      'linkedin',
+      'google',
+      'email',
+      'phone',
+      // new additions, not tested
+      'scatter',
+      'ledger',
+      'meetone',
+      'lynx',
+      'portis',
+      'whalevault',
+      'simpleos',
+      'keycat'
+    ];
+
+    const buttons = providers.map((provider) => {
+      return (
+        <SocialLoginButton
+          provider={provider}
+          onClick={() => clickedLogin(provider)}
+        />
+      );
+    });
+
     return (
       <div>
-        <SocialLoginButton
-          provider="facebook"
-          onClick={() => clickedLogin('facebook')}
-          //  text='Log in with Facebook'
-        />
-        <SocialLoginButton
-          provider="twitter"
-          onClick={() => clickedLogin('twitter')}
-          //  text='Log in with Twitter'
-        />
-        <SocialLoginButton
-          provider="github"
-          onClick={() => clickedLogin('github')}
-          //  text='Log in with Github'
-        />
-        <SocialLoginButton
-          provider="twitch"
-          onClick={() => clickedLogin('twitch')}
-          //  text='Log in with Twitch'
-        />
-        <SocialLoginButton
-          provider="line"
-          onClick={() => clickedLogin('line')}
-          //  text='Log in with Line'
-        />
-        <SocialLoginButton
-          provider="kakao"
-          onClick={() => clickedLogin('kakao')}
-          //  text='Log in with Kakao'
-        />
-        <SocialLoginButton
-          provider="linkedin"
-          onClick={() => clickedLogin('linkedin')}
-          //  text='Log in with LinkedIn'
-        />
-        <SocialLoginButton
-          provider="google"
-          onClick={() => clickedLogin('google')}
-          //  text='Log in with Google'
-        />
-        <SocialLoginButton
-          provider="email"
-          onClick={() => clickedLogin('email')}
-          //  text='Log in with Scatter'
-        />
-        <SocialLoginButton
-          provider="phone"
-          onClick={() => clickedLogin('phone')}
-          //  text='Log in with Scatter'
-        />
+        {buttons}
       </div>
     );
   }

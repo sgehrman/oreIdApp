@@ -15,6 +15,7 @@ function SigningOptions(props) {
 
       const transaction = Utils.createSampleTransaction(chainAccount, permission);
       const signOptions = {
+        allowChainAccountSelection: true, // Shows "Sign with External wallet" on Sign screen
         provider: provider || '', // wallet type (e.g. 'scatter' or 'oreid')
         account: account || '',
         broadcast: false, // if broadcast=true, ore id will broadcast the transaction to the chain network for you
@@ -23,6 +24,7 @@ function SigningOptions(props) {
         state: 'abc', // anything you'd like to remember after the callback
         transaction,
         accountIsTransactionPermission: false,
+        returnSignedTransaction: true
       };
       const signResponse = await ore.sign(signOptions);
       // if the sign responds with a signUrl, then redirect the browser to it to call the signing flow
