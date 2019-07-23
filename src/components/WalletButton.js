@@ -23,8 +23,8 @@ class WalletButton extends Component {
     const { provider, onClickCallback } = this.state;
 
     const defaultButtonStyle = {
-      margin: '6px',
-      color: '#ffffff',
+      margin: '8px',
+      fontSize: '.4em',
       width: 'auto'
     };
 
