@@ -1,20 +1,35 @@
 export default class Utils {
-  static createSampleTransaction(actor, permission = 'active') {
+  static createSendTransaction(actor, permission = 'active') {
     const transaction = {
       account: 'eosio.token',
       name: 'transfer',
       authorization: [
         {
           actor,
-          permission,
-        },
+          permission
+        }
       ],
       data: {
         from: actor,
         to: actor,
         quantity: '0.0001 EOS',
-        memo: `random number: ${Math.random()}`,
-      },
+        memo: `random number: ${Math.random()}`
+      }
+    };
+    return transaction;
+  }
+
+  static createSampleTransaction(actor, permission = 'active') {
+    const transaction = {
+      account: 'demoapphello',
+      name: 'hi',
+      authorization: [{
+        actor,
+        permission
+      }],
+      data: {
+        user: actor
+      }
     };
     return transaction;
   }

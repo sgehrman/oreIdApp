@@ -10,15 +10,14 @@ import UserInfo from './components/UserInfo';
 import modeEnum from './js/enums';
 import DiscoveryButtons from './components/DiscoveryButtons';
 import SigningOptions from './components/SigningOptions';
-import CaptchaComponent from './components/CaptchaComponent';
 import SettingsDialog from './components/SettingsDialog';
 
 const buttonMargin = {
-  marginBottom: '6px',
+  marginBottom: '6px'
 };
 
 function App() {
-  let p = localStorage.getItem('prod');
+  const p = localStorage.getItem('prod');
 
   let prod = false;
   if (p) {
@@ -30,7 +29,7 @@ function App() {
     userInfo: {},
     isLoggedIn: false,
     mode: modeEnum.START,
-    prod,
+    prod
   }));
 
   const ore = new ORE(model);
@@ -115,7 +114,6 @@ function App() {
         <div className="app-content">
           <SettingsDialog ore={ore} model={model} />
 
-          <CaptchaComponent action="homepage" />
           <div className="boxClass">
             <div className="titleClass">ORE ID TEST</div>
             <div className="subtitleClass">by Sasquatch</div>

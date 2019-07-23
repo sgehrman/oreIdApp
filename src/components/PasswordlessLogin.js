@@ -6,21 +6,20 @@ import ReactPhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/dist/style.css';
 import PhoneNumber from 'awesome-phonenumber';
 import modeEnum from '../js/enums';
-import CaptchaComponent from './CaptchaComponent';
 
 const localModeEnum = {
   START: 'start',
   ASK_EMAIL: 'askEmail',
   ASK_PHONE: 'askPhone',
   VERIFY_EMAIL: 'verifyEmail',
-  VERIFY_PHONE: 'verifyPhone',
+  VERIFY_PHONE: 'verifyPhone'
 };
 
 const buttonMargin = {
-  marginBottom: '6px',
+  marginBottom: '6px'
 };
 const buttonMarginTop = {
-  marginTop: '6px',
+  marginTop: '6px'
 };
 
 function PasswordlessLogin(props) {
@@ -90,7 +89,7 @@ function PasswordlessLogin(props) {
 
   async function clickedRequestCode(provider) {
     const args = {
-      provider,
+      provider
     };
 
     switch (provider) {
@@ -154,7 +153,7 @@ function PasswordlessLogin(props) {
           value={email}
           placeholder="example@example.com"
           InputLabelProps={{
-            shrink: true,
+            shrink: true
           }}
           margin="normal"
           variant="outlined"
@@ -198,7 +197,7 @@ function PasswordlessLogin(props) {
   function doAskRenderPhone() {
     const phoneProps = {
       required: true,
-      autoFocus: true,
+      autoFocus: true
     };
 
     return (
@@ -237,7 +236,7 @@ function PasswordlessLogin(props) {
           type="number"
           placeholder="123456"
           InputLabelProps={{
-            shrink: true,
+            shrink: true
           }}
           margin="normal"
           variant="outlined"
@@ -289,8 +288,6 @@ function PasswordlessLogin(props) {
 
     return (
       <div className="groupClass">
-        <CaptchaComponent action="passwordless" />
-
         <div className="header-title">Passwordless Login</div>
         <Button
           onClick={() => {

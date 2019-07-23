@@ -3,7 +3,6 @@ import Button from '@material-ui/core/Button';
 import { observer } from 'mobx-react-lite';
 import UserLoginView from './UserLoginView';
 import modeEnum from '../js/enums';
-import CaptchaComponent from './CaptchaComponent';
 
 function SocialLogin(props) {
   const { ore, model } = props;
@@ -26,8 +25,6 @@ function SocialLogin(props) {
   function doRender() {
     return (
       <div className="groupClass">
-        <CaptchaComponent action="social" />
-
         <div className="header-title">Social Login</div>
         <Button
           onClick={() => {

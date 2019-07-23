@@ -41,21 +41,21 @@ const buttonStyles = {
       color: 'black'
     },
     logoStyle: {},
-    text: 'Log in with Email'
+    text: 'Email'
   },
   facebook: {
     buttonStyle: {
       backgroundColor: '#3E5895'
     },
     logoStyle: {},
-    text: 'Log in with Facebook'
+    text: 'Facebook'
   },
   github: {
     buttonStyle: {
       backgroundColor: '#222222'
     },
     logoStyle: {},
-    text: 'Log in with Github'
+    text: 'Github'
   },
   google: {
     buttonStyle: {
@@ -63,7 +63,7 @@ const buttonStyles = {
       backgroundColor: '#fff'
     },
     logoStyle: {},
-    text: 'Log in with Google'
+    text: 'Google'
   },
   kakao: {
     buttonStyle: {
@@ -71,7 +71,7 @@ const buttonStyles = {
       backgroundColor: '#FFEB00'
     },
     logoStyle: {},
-    text: 'Log in with Kakao'
+    text: 'Kakao'
   },
   ledger: {
     buttonStyle: {
@@ -79,21 +79,21 @@ const buttonStyles = {
     },
     logoStyle: {
     },
-    text: 'Sign with Ledger'
+    text: 'Ledger'
   },
   line: {
     buttonStyle: {
       backgroundColor: '#00C300'
     },
     logoStyle: {},
-    text: 'Log in with Line'
+    text: 'Line'
   },
   linkedin: {
     buttonStyle: {
       backgroundColor: '#127cb4'
     },
     logoStyle: {},
-    text: 'Log in with LinkedIn'
+    text: 'LinkedIn'
   },
   lynx: {
     buttonStyle: {
@@ -103,7 +103,7 @@ const buttonStyles = {
       width: 30,
       height: 30
     },
-    text: 'Sign with Lynx'
+    text: 'Lynx'
   },
   meetone: {
     buttonStyle: {
@@ -111,7 +111,7 @@ const buttonStyles = {
     },
     logoStyle: {
     },
-    text: 'Sign with MeetOne'
+    text: 'MeetOne'
   },
   oreid: {
     buttonStyle: {
@@ -119,7 +119,7 @@ const buttonStyles = {
       backgroundColor: '#ffffff'
     },
     logoStyle: {},
-    text: 'Log in with ORE ID'
+    text: 'ORE ID'
   },
   phone: {
     buttonStyle: {
@@ -127,7 +127,7 @@ const buttonStyles = {
       color: 'black'
     },
     logoStyle: {},
-    text: 'Log in with Phone'
+    text: 'Phone'
   },
   scatter: {
     buttonStyle: {
@@ -135,7 +135,7 @@ const buttonStyles = {
     },
     logoStyle: {
     },
-    text: 'Log in with Scatter'
+    text: 'Scatter'
   },
   tokenpocket: {
     buttonStyle: {
@@ -143,28 +143,28 @@ const buttonStyles = {
     },
     logoStyle: {
     },
-    text: 'Sign with TokenPocket'
+    text: 'TokenPocket'
   },
   twitch: {
     buttonStyle: {
       backgroundColor: '#6441A4'
     },
     logoStyle: {},
-    text: 'Log in with Twitch'
+    text: 'Twitch'
   },
   twitter: {
     buttonStyle: {
       backgroundColor: '#55acee'
     },
     logoStyle: {},
-    text: 'Log in with Twitter'
+    text: 'Twitter'
   },
   wechat: {
     buttonStyle: {
       backgroundColor: '#00B70C'
     },
     logoStyle: {},
-    text: 'Log in with WeChat'
+    text: 'WeChat'
   }
 };
 
