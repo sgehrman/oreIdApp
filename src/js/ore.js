@@ -4,6 +4,15 @@ import ledgerProvider from 'eos-transit-ledger-provider';
 import lynxProvider from 'eos-transit-lynx-provider';
 import meetoneProvider from 'eos-transit-meetone-provider';
 import tokenpocketProvider from 'eos-transit-tokenpocket-provider';
+import keycatProvider from 'eos-transit-keycat-provider';
+import portisProvider from 'eos-transit-portis-provider';
+import simpleosProvider from 'eos-transit-simpleos-provider';
+import whalevaultProvider from 'eos-transit-whalevault-provider';
+import { Ledger } from 'ual-ledger';
+import { Scatter } from 'ual-scatter';
+import { Lynx } from 'ual-lynx';
+import { TokenPocket } from 'ual-token-pocket';
+
 import ENV from './env';
 
 export default class ORE {
@@ -30,7 +39,24 @@ export default class ORE {
   }
 
   createOREId() {
-    const eosTransitWalletProviders = [scatterProvider(), ledgerProvider({ pathIndexList: [0, 1, 2, 35] }), lynxProvider(), meetoneProvider(), tokenpocketProvider()];
+    const eosTransitWalletProviders = [
+      scatterProvider(),
+      ledgerProvider({ exchangeTimeout: 30000 }),
+      lynxProvider(),
+      meetoneProvider(),
+      tokenpocketProvider(),
+      keycatProvider(),
+      portisProvider(),
+      simpleosProvider(),
+      whalevaultProvider()
+    ];
+
+    const ualProviders = [
+      // Ledger,
+      // Scatter,
+      // TokenPocket,
+      // Lynx
+    ];
 
     const setBusyCallback = (isBusy) => {
       console.log('busy: ', isBusy);
@@ -47,6 +73,7 @@ export default class ORE {
       backgroundColor: this.env().backgroundColor,
       setBusyCallback,
       eosTransitWalletProviders,
+      ualProviders
     });
   }
 
