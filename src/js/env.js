@@ -18,7 +18,7 @@ const {
   REACT_APP_OREID_API_KEY_PROD: prodApiKey, // Provided when you register your app
   REACT_APP_OREID_URL_PROD: prodOreIdUrl, // HTTPS Address of OREID server
   REACT_APP_BACKGROUND_COLOR_PROD: prodBackgroundColor, // Background color shown during login flow
-  REACT_APP_CHAIN_NETWORK_PROD: prodChainNetwork,
+  REACT_APP_CHAIN_NETWORK_PROD: prodChainNetwork
 } = process.env;
 
 class ENV {
@@ -30,7 +30,7 @@ class ENV {
       apiKey,
       oreIdUrl,
       backgroundColor,
-      chainNetwork,
+      chainNetwork
     };
 
     this.modelProd = {
@@ -40,7 +40,7 @@ class ENV {
       apiKey: prodApiKey,
       oreIdUrl: prodOreIdUrl,
       backgroundColor: prodBackgroundColor,
-      chainNetwork: prodChainNetwork,
+      chainNetwork: prodChainNetwork
     };
 
     this.loadFromLocalStorage(true);
