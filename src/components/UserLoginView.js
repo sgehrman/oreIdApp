@@ -30,6 +30,7 @@ function UserLoginView(props) {
     const buttons = providers.map((provider) => {
       return (
         <SocialLoginButton
+          key={provider}
           provider={provider}
           onClick={() => clickedLogin(provider)}
         />
