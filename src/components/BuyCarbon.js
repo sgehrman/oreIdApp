@@ -24,6 +24,9 @@ function BuyCarbon(props) {
     });
   }
 
+  // sandboxApiKey: c0b723e5-6e44-47a5-9b4f-25f0f653f85c
+  // sandboxWebhookSecret: eq6ROQ7XXC
+
   if (!window.CarbonWidget) {
     load().then((result) => {
       console.log(result);
@@ -45,7 +48,7 @@ function BuyCarbon(props) {
           btc: '',
           bnb: ''
         },
-        apiKey: '', // update!
+        apiKey: 'c0b723e5-6e44-47a5-9b4f-25f0f653f85c', // update!
         // optional comma-delimited (no spaces) list of tokens to support
         // defaults to all
         // tokens: 'eth,eos,trx,btc,btt',
