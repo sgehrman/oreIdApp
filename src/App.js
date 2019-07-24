@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
-import { observer, useLocalStore } from 'mobx-react-lite';
+import { observer } from 'mobx-react-lite';
 import Button from '@material-ui/core/Button';
 import PasswordlessLogin from './components/PasswordlessLogin';
 import SocialLogin from './components/SocialLogin';
 import './App.scss';
-import ORE from './js/ore';
 import MessageBox from './components/MessageBox';
 import UserInfo from './components/UserInfo';
 import modeEnum from './js/enums';
@@ -16,23 +15,8 @@ const buttonMargin = {
   marginBottom: '6px'
 };
 
-function App() {
-  const p = localStorage.getItem('prod');
-
-  let prod = false;
-  if (p) {
-    prod = true;
-  }
-
-  const model = useLocalStore(() => ({
-    results: '',
-    userInfo: {},
-    isLoggedIn: false,
-    mode: modeEnum.START,
-    prod
-  }));
-
-  const ore = new ORE(model);
+function App(props) {
+  const { model, ore } = props;
 
   const [phone, setPhone] = React.useState('');
   const [email, setEmail] = React.useState('');
