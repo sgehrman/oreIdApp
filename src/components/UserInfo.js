@@ -15,7 +15,7 @@ function UserInfo(props) {
     <div className="boxClass">
       <div className="header-title">Logged in:</div>
       <div className="user-info-box">
-        <img src={picture} style={{ width: 50, height: 50 }} alt="user" />
+        <img src={picture} className="info-image" alt="user" />
         <div className="info-title"> accountName</div>
         <div>{accountName}</div>
 
