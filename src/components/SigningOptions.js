@@ -54,8 +54,10 @@ function SigningOptions(props) {
   function renderSignButtons() {
     return permissionsToRender.map((permission, index) => {
       const provider = permission.externalWalletType || 'oreid';
+      const key = provider + permission + permission.chainAccount + permission.chainNetwork;
+
       return (
-        <div className="sign-button-group" key={index}>
+        <div className="sign-button-group" key={key}>
           <SignButton
             provider={provider}
             text={`Sign with ${provider}`}

@@ -6,7 +6,7 @@ class WalletButton extends Component {
   constructor(props) {
     super(props);
 
-    const { provider } = props;
+    const { provider, onClick } = props;
 
     if (!ProviderStyles.isProviderValid(provider)) {
       throw Error(`${provider} is not one of the supported providers.`);
@@ -14,7 +14,7 @@ class WalletButton extends Component {
 
     this.state = {
       provider,
-      onClickCallback: this.props.onClick
+      onClickCallback: onClick
     };
   }
 
