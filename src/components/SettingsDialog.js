@@ -22,7 +22,7 @@ function SettingsDialog(props) {
       apiKey: ore.env().apiKey,
       oreIdUrl: ore.env().oreIdUrl,
       backgroundColor: ore.env().backgroundColor,
-      chainNetwork: ore.env().chainNetwork,
+      chainNetwork: ore.env().chainNetwork
     };
   }
 

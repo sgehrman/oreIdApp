@@ -8,8 +8,8 @@ const styles = (theme) => ({
     margin: theme.spacing.unit,
     position: 'fixed',
     top: 4,
-    left: 4,
-  },
+    left: 4
+  }
 });
 
 function FloatingActionButtons(props) {
