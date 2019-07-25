@@ -38,7 +38,7 @@ function BuyCarbon(props) {
 
       js.onload = () => {
         if (!window) {
-          reject(new Error('Google recaptcha is not available'));
+          reject(new Error('Carbon is not available'));
         }
 
         resolve('success');
@@ -51,8 +51,7 @@ function BuyCarbon(props) {
   // sandboxApiKey: c0b723e5-6e44-47a5-9b4f-25f0f653f85c
   // sandboxWebhookSecret: eq6ROQ7XXC
 
-  // if (!window.CarbonWidget) {
-  if (window === 'duh') {
+  if (!window.CarbonWidget) {
     load().then((result) => {
       window.CarbonWidget.default.carbonFiber.render({
         clientName: 'Carbon Fiber',
