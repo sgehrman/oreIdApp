@@ -1,3 +1,5 @@
+import jwt from 'jsonwebtoken';
+
 export default class Utils {
   static createSendTransaction(actor, permission = 'active') {
     const transaction = {
@@ -32,5 +34,9 @@ export default class Utils {
       }
     };
     return transaction;
+  }
+
+  static decodeJWT(token) {
+    return jwt.decode(token, { typ: 'JWT' });
   }
 }
