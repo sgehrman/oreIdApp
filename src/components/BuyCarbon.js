@@ -125,16 +125,27 @@ function BuyCarbon(props) {
   }
 
   function showContacts(e) {
-    const url = `${ROOT}/v1/contacts/current?contactId=${contactId}`;
+    const url = `${ROOT}/v1/contacts/all`;
 
-    axios.get(url)
+    const headers = {
+      headers: {
+        Authorization: `Bearer ${jwtToken}`
+      }
+    };
+
+    axios.get(url, headers)
       .then((result) => {
         const { data } = result;
 
         setJsonData(data);
-        console.log('Success', result);
+
+        console.log(result);
       })
-      .catch((err) => console.log('Error', err));
+      .catch((err) => console.log(err));
+  }
+
+  function showContact(e) {
+    const url = `${ROOT}/v1/contacts/current?contactId=${contactId}`;
 
     const headers = {
       headers: {
@@ -176,6 +187,10 @@ function BuyCarbon(props) {
       <div className={styles.buttons}>
         <Button onClick={createContact}>
           Create Contact
+        </Button>
+
+        <Button onClick={showContact}>
+          Show Contact
         </Button>
 
         <Button onClick={showContacts}>
