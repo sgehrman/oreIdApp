@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
+import $ from 'jquery';
 import JSONDialog from './JSONDialog';
 import styles from './BuyCarbon.module.scss';
-
-console.log(styles);
 
 const API_KEY = 'c0b723e5-6e44-47a5-9b4f-25f0f653f85c';
 const ROOT = process.env.NODE_ENV === 'PRODUCTION' ? 'https://api.carbon.money' : 'https://sandbox.carbon.money';
@@ -57,18 +56,26 @@ function BuyCarbon(props) {
         clientName: 'Carbon Fiber',
         // options are sandbox or production
         environment: 'sandbox',
-        tokens: 'eth',
-        // currencies: "usd",
+        tokens: [
+          // 'eth',
+          // 'bnb',
+          // 'trx',
+          // 'btt',
+          // 'btc',
+          // 'cusdeos',
+          'eos'],
+        currencies: 'usd',
         homeScreenMessage: 'Buy ORE Tokens',
         // defaults can specify externally if you authenticate addresses
         // elsewhere say as a wallet
         receiveAddress: {
-          eth: '',
-          eos: '',
-          trx: '',
-          btt: '',
-          btc: '',
-          bnb: ''
+          // eth: '',
+          // trx: '',
+          // btt: '',
+          // btc: '',
+          // bnb: '',
+          // cusdeos: 'lsdlsdlsdlsd',
+          eos: 'lsdlsdlsdlsd'
         },
         apiKey: API_KEY, // update!
         // optional comma-delimited (no spaces) list of tokens to support
@@ -180,6 +187,43 @@ function BuyCarbon(props) {
     axios.post(url, data).then((result) => console.log(result)).catch((err) => console.log(err));
   }
 
+  function fillInCreditCard() {
+    const cc = $('input#card-number');
+    if (cc.length === 1) {
+      cc.val('4111110000000211');
+    } else {
+      console.log('not found');
+    }
+
+    const exp = $('input#card-expiry');
+    if (exp.length === 1) {
+      exp.val('12/30');
+    } else {
+      console.log('not found exp');
+    }
+
+    const cvc = $('input#cvc');
+    if (cvc.length === 1) {
+      cvc.val('123');
+    } else {
+      console.log('not found cvc');
+    }
+
+    const zip = $('input#zip');
+    if (zip.length === 1) {
+      zip.val('55555');
+    } else {
+      console.log('not found zip');
+    }
+
+    const addr = $('input#streetAddress1');
+    if (addr.length === 1) {
+      addr.val('No 789');
+    } else {
+      console.log('not found addr');
+    }
+  }
+
   return (
     <div>
       <div id="carbonfiber" />
@@ -203,6 +247,10 @@ function BuyCarbon(props) {
 
         <Button onClick={createSuperUser}>
           Create Super User
+        </Button>
+
+        <Button onClick={fillInCreditCard}>
+          Fill in CC
         </Button>
 
         <JSONDialog
