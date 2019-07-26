@@ -43,6 +43,11 @@ function SettingsDialog(props) {
     setOpen(false);
   }
 
+  function handleRestore() {
+    ore.restoreDefaults();
+    setValues({ ...currentENV() });
+  }
+
   const handleChange = (name) => (event) => {
     setValues({ ...values, [name]: event.target.value });
   };
@@ -73,6 +78,9 @@ function SettingsDialog(props) {
           <TextField margin="dense" value={values.chainNetwork} label="Chain Network" type="text" fullWidth onChange={handleChange('chainNetwork')} />
         </DialogContent>
         <DialogActions>
+          <Button onClick={handleRestore} color="primary">
+            Restore Defaults
+          </Button>
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>

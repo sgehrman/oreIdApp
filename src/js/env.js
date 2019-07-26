@@ -23,28 +23,35 @@ const {
 
 class ENV {
   constructor() {
-    this.model = {
-      authCallbackUrl,
-      signCallbackUrl,
-      appId,
-      apiKey,
-      oreIdUrl,
-      backgroundColor,
-      chainNetwork
-    };
-
-    this.modelProd = {
-      authCallbackUrl: prodAuthCallbackUrl,
-      signCallbackUrl: prodSignCallbackUrl,
-      appId: prodAppId,
-      apiKey: prodApiKey,
-      oreIdUrl: prodOreIdUrl,
-      backgroundColor: prodBackgroundColor,
-      chainNetwork: prodChainNetwork
-    };
+    this.setDefaultValues(true);
+    this.setDefaultValues(false);
 
     this.loadFromLocalStorage(true);
     this.loadFromLocalStorage(false);
+  }
+
+  setDefaultValues(prod) {
+    if (prod) {
+      this.modelProd = {
+        authCallbackUrl: prodAuthCallbackUrl,
+        signCallbackUrl: prodSignCallbackUrl,
+        appId: prodAppId,
+        apiKey: prodApiKey,
+        oreIdUrl: prodOreIdUrl,
+        backgroundColor: prodBackgroundColor,
+        chainNetwork: prodChainNetwork
+      };
+    } else {
+      this.model = {
+        authCallbackUrl,
+        signCallbackUrl,
+        appId,
+        apiKey,
+        oreIdUrl,
+        backgroundColor,
+        chainNetwork
+      };
+    }
   }
 
   getModel(prod) {
@@ -53,6 +60,11 @@ class ENV {
     }
 
     return this.model;
+  }
+
+  restoreDefaults(prod) {
+    this.saveToLocalStorage('', prod);
+    this.setDefaultValues(prod);
   }
 
   saveToLocalStorage(setting, prod) {
@@ -79,17 +91,19 @@ class ENV {
     if (settings && settings.length) {
       const obj = JSON.parse(settings);
 
-      const valid = (str) => {
-        return str && str.length > 0;
-      };
+      if (obj) {
+        const valid = (str) => {
+          return str && str.length > 0;
+        };
 
-      m.authCallbackUrl = valid(obj.authCallbackUrl) ? obj.authCallbackUrl : m.authCallbackUrl;
-      m.signCallbackUrl = valid(obj.signCallbackUrl) ? obj.signCallbackUrl : m.signCallbackUrl;
-      m.appId = valid(obj.appId) ? obj.appId : m.appId;
-      m.apiKey = valid(obj.apiKey) ? obj.apiKey : m.apiKey;
-      m.oreIdUrl = valid(obj.oreIdUrl) ? obj.oreIdUrl : m.oreIdUrl;
-      m.backgroundColor = valid(obj.backgroundColor) ? obj.backgroundColor : m.backgroundColor;
-      m.chainNetwork = valid(obj.chainNetwork) ? obj.chainNetwork : m.chainNetwork;
+        m.authCallbackUrl = valid(obj.authCallbackUrl) ? obj.authCallbackUrl : m.authCallbackUrl;
+        m.signCallbackUrl = valid(obj.signCallbackUrl) ? obj.signCallbackUrl : m.signCallbackUrl;
+        m.appId = valid(obj.appId) ? obj.appId : m.appId;
+        m.apiKey = valid(obj.apiKey) ? obj.apiKey : m.apiKey;
+        m.oreIdUrl = valid(obj.oreIdUrl) ? obj.oreIdUrl : m.oreIdUrl;
+        m.backgroundColor = valid(obj.backgroundColor) ? obj.backgroundColor : m.backgroundColor;
+        m.chainNetwork = valid(obj.chainNetwork) ? obj.chainNetwork : m.chainNetwork;
+      }
     }
   }
 }

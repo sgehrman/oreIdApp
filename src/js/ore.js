@@ -34,6 +34,11 @@ export default class ORE {
     this.createOREId();
   }
 
+  restoreDefaults() {
+    this.v_env.restoreDefaults(this.v_model.prod);
+    this.createOREId();
+  }
+
   saveSettings(settings) {
     this.v_env.saveToLocalStorage(settings, this.v_model.prod);
   }
