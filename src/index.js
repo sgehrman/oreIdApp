@@ -12,7 +12,9 @@ function AppRoot() {
   const p = localStorage.getItem('prod');
 
   let prod = false;
-  if (p) {
+
+  // bools are stored as 'true', 'false
+  if (p === 'true') {
     prod = true;
   }
 
