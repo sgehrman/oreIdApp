@@ -38,7 +38,9 @@ function DiscoveryButtons(props) {
       ore.displayResults();
 
       const { provider } = walletButtons[permissionIndex] || {};
-      await ore.discover({ provider, chainNetwork: ore.env().chainNetwork });
+      const { accountName } = model.userInfo;
+
+      await ore.discover({ provider, chainNetwork: ore.env().chainNetwork, oreAccount: accountName });
 
       ore.loadUserFromApi(model.userInfo.accountName); // reload user from ore id api - to show new keys discovered
     } catch (error) {
