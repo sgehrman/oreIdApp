@@ -145,7 +145,7 @@ export default class ORE {
     if (/signcallback/i.test(url)) {
       const { signedTransaction, state, errors } = await this.v_oreid.handleSignResponse(url);
       if (!errors && signedTransaction) {
-        this.displayResults(signedTransaction, 'Returned signed transaction');
+        this.displayResults(signedTransaction, 'Signed transaction');
         this.v_model.signState = state;
       } else {
         this.displayResults(errors, 'Error');

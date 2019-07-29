@@ -49,7 +49,6 @@ function SigningOptions(props) {
         window.location = signUrl;
       }
       if (signedTransaction) {
-        // dialog
         setDialogTitle('Signed transaction');
         setJsonData(signedTransaction);
 
