@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { observer } from 'mobx-react-lite';
+import { Base64 } from 'js-base64';
 import SignButton from './SignButton';
 import Utils from '../js/utils';
+import JSONDialog from './JSONDialog';
 
 function SigningOptions(props) {
   const { model, ore } = props;
   const { permissions } = model.userInfo;
+  const [jsonData, setJsonData] = useState(null);
+  const [dialogTitle, setDialogTitle] = useState('Results');
 
   const permissionsToRender = (permissions || []).slice();
+
+  function actionCallback(action) {
+    switch (action) {
+      case 'close':
+        setJsonData(null);
+        break;
+      default:
+        console.log('Switch statement hit default: action callback', action);
+        break;
+    }
+  }
 
   async function handleSignSampleTransaction(provider, account, chainAccount, chainNetwork, permission) {
     try {
@@ -34,6 +49,11 @@ function SigningOptions(props) {
         window.location = signUrl;
       }
       if (signedTransaction) {
+        // dialog
+        setDialogTitle('Signed transaction');
+        setJsonData(signedTransaction);
+
+        // result display
         ore.displayResults(signedTransaction, 'Signed transaction');
       }
     } catch (error) {
@@ -77,6 +97,13 @@ function SigningOptions(props) {
     <div className="boxClass">
       <div className="header-title">Sign transaction with one of your keys</div>
       <div>{renderSignButtons()}</div>
+
+      <JSONDialog
+        actionCallback={actionCallback}
+        jsonData={jsonData}
+        title={dialogTitle}
+      />
+
     </div>
   );
 }

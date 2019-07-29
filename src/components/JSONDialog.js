@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 import Utils from '../js/utils';
 
 export default function JSONDialog(props) {
-  const { actionCallback, jsonData } = props;
+  const { actionCallback, jsonData, title } = props;
   const [open, setOpen] = useState(false);
 
   const showDialog = (jsonData !== null && (typeof jsonData === 'object'));
@@ -52,10 +52,15 @@ export default function JSONDialog(props) {
     margin: '6px 20px'
   };
 
+  let dialogTitle = 'Results';
+  if (title && title.length > 0) {
+    dialogTitle = title;
+  }
+
   return (
     <div style={mainStyle}>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Results</DialogTitle>
+        <DialogTitle id="form-dialog-title">{dialogTitle}</DialogTitle>
         <DialogContent>
           {jsonView}
         </DialogContent>
