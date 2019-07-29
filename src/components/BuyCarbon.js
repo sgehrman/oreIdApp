@@ -6,6 +6,7 @@ import JSONDialog from './JSONDialog';
 import styles from './BuyCarbon.module.scss';
 
 const API_KEY = 'c0b723e5-6e44-47a5-9b4f-25f0f653f85c';
+const JUNGLE_ACCOUNT = 'onetwoonetwo';
 const ROOT = process.env.NODE_ENV === 'PRODUCTION' ? 'https://api.carbon.money' : 'https://sandbox.carbon.money';
 
 function BuyCarbon(props) {
@@ -74,8 +75,8 @@ function BuyCarbon(props) {
           // btt: '',
           // btc: '',
           // bnb: '',
-          // cusdeos: 'lsdlsdlsdlsd',
-          eos: 'lsdlsdlsdlsd'
+          // cusdeos: JUNGLE_ACCOUNT,
+          eos: JUNGLE_ACCOUNT
         },
         apiKey: API_KEY, // update!
         // optional comma-delimited (no spaces) list of tokens to support
@@ -225,10 +226,14 @@ function BuyCarbon(props) {
   }
 
   return (
-    <div>
+    <div className={styles.buyCarbon}>
       <div id="carbonfiber" />
 
       <div className={styles.buttons}>
+        <Button onClick={fillInCreditCard}>
+          Fill in Credit Card
+        </Button>
+
         <Button onClick={createContact}>
           Create Contact
         </Button>
@@ -247,10 +252,6 @@ function BuyCarbon(props) {
 
         <Button onClick={createSuperUser}>
           Create Super User
-        </Button>
-
-        <Button onClick={fillInCreditCard}>
-          Fill in CC
         </Button>
 
         <JSONDialog
