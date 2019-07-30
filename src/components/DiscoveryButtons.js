@@ -42,7 +42,8 @@ function DiscoveryButtons(props) {
 
       await ore.discover({ provider, chainNetwork: ore.env().chainNetwork, oreAccount: accountName });
 
-      ore.loadUserFromApi(model.userInfo.accountName); // reload user from ore id api - to show new keys discovered
+      // reload user from ore id api - to show new keys discovered
+      ore.getUser(model.userInfo.accountName);
     } catch (error) {
       ore.displayResults(error, 'Error');
     }

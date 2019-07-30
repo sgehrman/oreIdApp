@@ -101,11 +101,7 @@ export default class ORE {
   async loadUserFromLocalState() {
     this.v_waitingForLocalStateLogin = true;
 
-    const info = await this.v_oreid.getUser();
-
-    if (info && info.accountName) {
-      this.setUserInfo(info);
-    }
+    await this.getUser();
 
     this.v_waitingForLocalStateLogin = false;
   }
@@ -132,7 +128,7 @@ export default class ORE {
     if (/authcallback/i.test(url)) {
       const { account, errors } = await this.v_oreid.handleAuthResponse(url);
       if (!errors) {
-        this.loadUserFromApi(account);
+        this.getUser(account);
       } else {
         this.displayResults(errors, 'Error');
       }
@@ -187,14 +183,13 @@ export default class ORE {
     this.v_oreid.logout();
   }
 
-  async loadUserFromApi(account) {
+  // if you don't pass the account, it gets the cached values
+  async getUser(account = null) {
     this.displayResults();
 
     try {
-      const info = await this.v_oreid.getUserInfoFromApi(account);
+      const info = await this.v_oreid.getUser(account);
       this.setUserInfo(info);
-
-      this.displayResults(info, 'User Info');
     } catch (error) {
       this.displayResults(error, 'Error');
     }
