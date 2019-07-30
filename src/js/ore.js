@@ -64,7 +64,6 @@ export default class ORE {
     ];
 
     const setBusyCallback = (isBusy) => {
-      console.log('busy: ', isBusy);
       this.v_busyFlag = isBusy;
     };
 
