@@ -64,6 +64,7 @@ function BuyCarbon(props) {
           // 'btt',
           // 'btc',
           // 'cusdeos',
+          'cusdbinance',
           'eos'],
         currencies: 'usd',
         homeScreenMessage: 'Buy ORE Tokens',
@@ -75,6 +76,7 @@ function BuyCarbon(props) {
           // btt: '',
           // btc: '',
           // bnb: '',
+          cusdbinance: 'tbnb196y8elvhu4nss4kxxql5qmv6mn90t980728ulk',
           // cusdeos: JUNGLE_ACCOUNT,
           eos: JUNGLE_ACCOUNT
         },
@@ -198,7 +200,7 @@ function BuyCarbon(props) {
 
     const exp = $('input#card-expiry');
     if (exp.length === 1) {
-      exp.val('12/30');
+      exp.val('12 / 30');
     } else {
       console.log('not found exp');
     }
