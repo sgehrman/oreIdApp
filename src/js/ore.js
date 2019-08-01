@@ -127,7 +127,7 @@ export default class ORE {
     if (/authcallback/i.test(url)) {
       const { account, errors } = await this.v_oreid.handleAuthResponse(url);
       if (!errors) {
-        this.getUser(account);
+        this.getUser(account, true);
       } else {
         this.displayResults(errors, 'Error');
       }
@@ -183,11 +183,11 @@ export default class ORE {
   }
 
   // if you don't pass the account, it gets the cached values
-  async getUser(account = null) {
+  async getUser(account = null, refresh = false) {
     this.displayResults();
 
     try {
-      const info = await this.v_oreid.getUser(account);
+      const info = await this.v_oreid.getUser(account, refresh);
       this.setUserInfo(info);
     } catch (error) {
       this.displayResults(error, 'Error');
