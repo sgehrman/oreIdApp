@@ -4,6 +4,10 @@
   align-items: center;
   justify-content: center;
 
+  // fonts within the carbon widget for credit card are set to 1em
+  // set this to 16 so it won't be too large (.app sets the font to larger)
+  font-size: 16px;
+
   .buttons {
     display: flex;
     flex-direction: column;
