@@ -39,7 +39,8 @@ function SigningOptions(props) {
         state: 'abc', // anything you'd like to remember after the callback
         transaction,
         accountIsTransactionPermission: false,
-        returnSignedTransaction: true
+        returnSignedTransaction: true,
+        signExternalWithOreId: true // optional to test PIN window signing for external wallets
       };
       const signResponse = await ore.sign(signOptions);
       // if the sign responds with a signUrl, then redirect the browser to it to call the signing flow
