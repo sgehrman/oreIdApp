@@ -69,9 +69,9 @@ class ENV {
 
   saveToLocalStorage(setting, prod) {
     if (prod) {
-      localStorage.setItem('settings-prod', setting);
+      localStorage.setItem('settings-production', setting);
     } else {
-      localStorage.setItem('settings', setting);
+      localStorage.setItem('settings-staging', setting);
     }
   }
 
@@ -81,10 +81,10 @@ class ENV {
 
     if (prod) {
       m = this.modelProd;
-      settings = localStorage.getItem('settings-prod');
+      settings = localStorage.getItem('settings-production');
     } else {
       m = this.model;
-      settings = localStorage.getItem('settings');
+      settings = localStorage.getItem('settings-staging');
     }
 
     // merge localstorage values
