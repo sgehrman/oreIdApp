@@ -7,7 +7,7 @@ import styles from './BuyCarbon.module.scss';
 
 const API_KEY = 'c0b723e5-6e44-47a5-9b4f-25f0f653f85c';
 const JUNGLE_ACCOUNT = 'onetwoonetwo';
-const ROOT = process.env.NODE_ENV === 'PRODUCTION' ? 'https://api.carbon.money' : 'https://sandbox.carbon.money';
+const ROOT = process.env.NODE_ENV === 'production' ? 'https://api.carbon.money' : 'https://sandbox.carbon.money';
 
 function BuyCarbon(props) {
   const [jsonData, setJsonData] = useState(null);
