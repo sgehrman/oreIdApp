@@ -8,10 +8,10 @@ import keycatProvider from 'eos-transit-keycat-provider';
 import portisProvider from 'eos-transit-portis-provider';
 import simpleosProvider from 'eos-transit-simpleos-provider';
 import whalevaultProvider from 'eos-transit-whalevault-provider';
-import { Ledger } from 'ual-ledger';
-import { Scatter } from 'ual-scatter';
-import { Lynx } from 'ual-lynx';
-import { TokenPocket } from 'ual-token-pocket';
+// import { Ledger } from 'ual-ledger';
+// import { Scatter } from 'ual-scatter';
+// import { Lynx } from 'ual-lynx';
+// import { TokenPocket } from 'ual-token-pocket';
 
 import ENV from './env';
 

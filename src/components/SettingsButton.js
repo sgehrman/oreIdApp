@@ -5,7 +5,6 @@ import CogIcon from '@material-ui/icons/Settings';
 
 const styles = (theme) => ({
   fab: {
-    margin: theme.spacing.unit,
     position: 'fixed',
     top: 4,
     left: 4
@@ -17,7 +16,7 @@ function FloatingActionButtons(props) {
 
   return (
     <div>
-      <Fab color="primary" aria-label="Add" className={classes.fab} onClick={onClick}>
+      <Fab size="small" color="primary" aria-label="Add" className={classes.fab} onClick={onClick}>
         <CogIcon />
       </Fab>
     </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ReactJson from 'react-json-view';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -47,9 +47,6 @@ export default function JSONDialog(props) {
 
   const mainStyle = {
     marginTop: '16px'
-  };
-  const buttonStyle = {
-    margin: '6px 20px'
   };
 
   let dialogTitle = 'Results';

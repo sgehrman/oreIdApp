@@ -36,7 +36,7 @@ function PasswordlessLogin(props) {
   useEffect(() => {
     ore.loadUserFromLocalState();
     ore.handleAuthCallback();
-  }, []);
+  }, [ore]);
 
   function handleEmailChange(e) {
     const { value } = e.target;

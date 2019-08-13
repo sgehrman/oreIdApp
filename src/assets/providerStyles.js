@@ -31,7 +31,10 @@ const validProviders = [
   'tokenpocket',
   'email',
   'phone',
-  'simpleos'
+  'simpleos',
+  'portis',
+  'whalevault',
+  'keycat'
 ];
 
 const buttonStyles = {

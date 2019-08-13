@@ -40,7 +40,7 @@ function App(props) {
     ore.handleAuthCallback();
     ore.handleSignCallback();
     loadFromStorage();
-  }, []);
+  }, [ore]);
 
   function clickedLoginStyle(provider) {
     model.mode = provider;

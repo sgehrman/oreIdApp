@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Base64 } from 'js-base64';
 import SignButton from './SignButton';
 import Utils from '../js/utils';
 import JSONDialog from './JSONDialog';
