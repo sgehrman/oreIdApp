@@ -10,7 +10,6 @@ import modeEnum from './js/enums';
 import DiscoveryButtons from './components/DiscoveryButtons';
 import SigningOptions from './components/SigningOptions';
 import SettingsDialog from './components/SettingsDialog';
-import BuyCarbon from './components/BuyCarbon';
 
 const buttonMargin = {
   marginBottom: '6px'
@@ -78,7 +77,6 @@ function App(props) {
           <UserInfo ore={ore} model={model} />
           <SigningOptions ore={ore} model={model} />
           <DiscoveryButtons ore={ore} model={model} />
-          <BuyCarbon ore={ore} model={model} />
         </div>
       );
     } else {
